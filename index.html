@@ -1,0 +1,418 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Dribble World — Long Passes + Walk Along · 3dar × FIFA</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Anton&family=Inter:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;600&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --bg:#07070c; --bg-2:#0e0e16; --surface:#13131e; --surface-2:#1a1a28;
+    --border:#262638; --border-2:#3a3a55;
+    --text:#f0f0f5; --text-2:#a8a8bd; --text-3:#6f6f85;
+    --cyan:#00d4ff; --pink:#ff2d92; --gold:#f5c842; --green:#00ff88; --orange:#ff7a2d; --violet:#9d6bff;
+  }
+  *{box-sizing:border-box}
+  html,body{margin:0;padding:0;background:var(--bg);color:var(--text);font-family:'Inter',system-ui,sans-serif;line-height:1.55;-webkit-font-smoothing:antialiased}
+  body{overflow-x:hidden}
+  a{color:var(--cyan);text-decoration:none}
+  a:hover{text-decoration:underline}
+
+  /* nav */
+  .nav{position:sticky;top:0;z-index:50;backdrop-filter:blur(14px);background:rgba(7,7,12,.78);border-bottom:1px solid var(--border)}
+  .nav-inner{max-width:1280px;margin:0 auto;padding:14px 28px;display:flex;align-items:center;gap:24px;flex-wrap:wrap}
+  .nav-brand{font-family:'Anton',sans-serif;font-size:18px;letter-spacing:.06em;text-transform:uppercase}
+  .nav-brand .dot{display:inline-block;width:8px;height:8px;border-radius:50%;background:var(--cyan);margin-right:10px;box-shadow:0 0 12px var(--cyan)}
+  .nav-links{display:flex;gap:18px;flex-wrap:wrap;font-size:12px;font-weight:500;letter-spacing:.04em;text-transform:uppercase;color:var(--text-2)}
+  .nav-links a{color:var(--text-2);padding:6px 0}
+  .nav-links a:hover{color:var(--text);text-decoration:none}
+  .nav-cta{margin-left:auto;font-size:11px;color:var(--text-3);font-family:'JetBrains Mono',monospace}
+
+  /* hero */
+  .hero{position:relative;overflow:hidden;padding:88px 28px 72px;border-bottom:1px solid var(--border);
+    background:
+      radial-gradient(1100px 600px at 20% 10%,rgba(0,212,255,.16),transparent 60%),
+      radial-gradient(900px 500px at 80% 30%,rgba(255,45,146,.16),transparent 60%),
+      radial-gradient(700px 700px at 50% 100%,rgba(245,200,66,.08),transparent 60%),
+      linear-gradient(180deg,#06060c 0%,#0a0a14 100%);
+  }
+  .hero::before{content:"";position:absolute;inset:0;
+    background-image:linear-gradient(rgba(255,255,255,.025) 1px,transparent 1px),linear-gradient(90deg,rgba(255,255,255,.025) 1px,transparent 1px);
+    background-size:48px 48px;
+    mask-image:radial-gradient(ellipse at center,black 30%,transparent 75%);pointer-events:none}
+  .hero-inner{max-width:1280px;margin:0 auto;position:relative}
+  .eyebrow{font-family:'JetBrains Mono',monospace;font-size:11px;letter-spacing:.18em;text-transform:uppercase;color:var(--cyan);margin-bottom:16px;display:inline-flex;gap:14px;align-items:center;flex-wrap:wrap}
+  .eyebrow .pill{padding:4px 10px;border:1px solid var(--cyan);border-radius:999px;font-size:10px}
+  h1.hero-title{font-family:'Anton',sans-serif;font-size:clamp(48px,8.5vw,128px);line-height:.92;letter-spacing:-.01em;text-transform:uppercase;margin:0 0 22px;
+    background:linear-gradient(180deg,#fff 0%,#9aa4ff 60%,#5366ff 100%);
+    -webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent;text-shadow:0 0 80px rgba(83,102,255,.25)}
+  .hero-sub{font-size:clamp(16px,1.4vw,20px);max-width:780px;color:var(--text-2);margin:0 0 28px}
+  .hero-meta{display:flex;gap:28px;flex-wrap:wrap;font-family:'JetBrains Mono',monospace;font-size:11px;color:var(--text-3);border-top:1px solid var(--border);padding-top:18px;margin-top:28px}
+  .hero-meta b{color:var(--text);font-weight:600}
+
+  /* sections */
+  .section{padding:80px 28px;border-bottom:1px solid var(--border)}
+  .section-inner{max-width:1280px;margin:0 auto}
+  .section-head{display:flex;flex-wrap:wrap;align-items:end;gap:24px;margin-bottom:28px}
+  .section-num{font-family:'JetBrains Mono',monospace;font-size:12px;color:var(--text-3);letter-spacing:.16em}
+  .section-title{font-family:'Anton',sans-serif;font-size:clamp(40px,5.5vw,76px);line-height:.95;text-transform:uppercase;margin:6px 0 0;letter-spacing:-.005em}
+  .section-lede{max-width:560px;color:var(--text-2);font-size:15px;margin-left:auto}
+
+  /* idea hero image */
+  .idea-hero{position:relative;border-radius:18px;overflow:hidden;border:1px solid var(--border);margin-bottom:28px;background:#000}
+  .idea-hero img{display:block;width:100%;height:auto;object-fit:cover}
+  .idea-hero-tall{aspect-ratio:21/9;overflow:hidden}
+  .idea-hero-tall img{width:100%;height:100%;object-fit:cover}
+  .idea-hero-caption{position:absolute;inset:auto 0 0 0;padding:18px 22px;background:linear-gradient(180deg,transparent,rgba(0,0,0,.85));font-family:'JetBrains Mono',monospace;font-size:11px;color:var(--text-2);letter-spacing:.06em}
+  .idea-hero-caption b{color:var(--cyan)}
+
+  /* idea body two-col */
+  .idea-grid{display:grid;grid-template-columns:1.4fr 1fr;gap:36px;align-items:start}
+  @media (max-width:920px){.idea-grid{grid-template-columns:1fr}}
+  .idea-pitch{font-family:'Anton',sans-serif;font-size:clamp(20px,1.8vw,26px);color:var(--cyan);text-transform:uppercase;letter-spacing:.04em;margin:0 0 18px;line-height:1.2}
+  .idea-desc{font-size:16px;color:var(--text);margin:0 0 14px;line-height:1.65}
+  .idea-desc b{color:var(--gold);font-weight:600}
+  .idea-side{border:1px solid var(--border);border-radius:14px;padding:20px 22px;background:var(--surface);font-size:13px;color:var(--text-2)}
+  .idea-side h4{font-family:'Anton',sans-serif;font-size:14px;color:var(--text-3);text-transform:uppercase;letter-spacing:.14em;margin:0 0 8px;font-weight:normal}
+  .idea-side h4:not(:first-child){margin-top:18px}
+  .idea-side p{margin:0;line-height:1.55}
+  .idea-side b{color:var(--text)}
+  .idea-side ul{margin:6px 0 0;padding-left:18px}
+  .idea-side li{margin-bottom:4px;line-height:1.5}
+
+  /* image gallery */
+  .gallery{display:grid;grid-template-columns:repeat(4,1fr);gap:14px;margin-top:32px}
+  @media (max-width:880px){.gallery{grid-template-columns:repeat(2,1fr)}}
+  .gallery figure{margin:0;border:1px solid var(--border);border-radius:12px;overflow:hidden;background:#000;position:relative;aspect-ratio:4/5}
+  .gallery figure img{display:block;width:100%;height:100%;object-fit:cover;transition:transform .4s ease}
+  .gallery figure:hover img{transform:scale(1.04)}
+  .gallery figcaption{position:absolute;left:0;right:0;bottom:0;padding:10px 12px;background:linear-gradient(180deg,transparent,rgba(0,0,0,.85));font-family:'JetBrains Mono',monospace;font-size:10px;color:var(--text-2);letter-spacing:.06em}
+
+  .gallery.wide figure{aspect-ratio:16/10}
+
+  /* sequence flow */
+  .sequence{display:grid;grid-template-columns:repeat(5,1fr);gap:10px;margin-top:24px;align-items:center}
+  @media (max-width:880px){.sequence{grid-template-columns:1fr}}
+  .seq-step{position:relative;border:1px solid var(--border);border-radius:12px;overflow:hidden;background:#000;aspect-ratio:3/4}
+  .seq-step img{display:block;width:100%;height:100%;object-fit:cover}
+  .seq-label{position:absolute;top:8px;left:8px;background:rgba(0,0,0,.7);backdrop-filter:blur(4px);color:#fff;font-family:'JetBrains Mono',monospace;font-size:10px;letter-spacing:.08em;padding:4px 8px;border-radius:999px;text-transform:uppercase}
+  .seq-arrow{font-family:'Anton',sans-serif;font-size:32px;color:var(--cyan);text-align:center;line-height:1}
+  @media (max-width:880px){.seq-arrow{transform:rotate(90deg);padding:6px 0}}
+
+  /* tag chips */
+  .tag{display:inline-block;font-family:'JetBrains Mono',monospace;font-size:10px;letter-spacing:.08em;text-transform:uppercase;padding:4px 9px;border-radius:999px;border:1px solid var(--border-2);color:var(--text-2);margin-right:6px;vertical-align:middle}
+  .tag.cyan{color:var(--cyan);border-color:rgba(0,212,255,.5)}
+  .tag.pink{color:var(--pink);border-color:rgba(255,45,146,.5)}
+  .tag.gold{color:var(--gold);border-color:rgba(245,200,66,.5)}
+  .tag.green{color:var(--green);border-color:rgba(0,255,136,.5)}
+
+  /* brief callout */
+  .row{display:grid;grid-template-columns:repeat(4,1fr);gap:14px;margin-top:24px}
+  @media (max-width:880px){.row{grid-template-columns:repeat(2,1fr)}}
+  .stat-card{border:1px solid var(--border);border-radius:12px;padding:16px;background:var(--surface)}
+  .stat-card .k{font-family:'JetBrains Mono',monospace;font-size:10px;color:var(--text-3);letter-spacing:.12em;text-transform:uppercase}
+  .stat-card .v{font-family:'Anton',sans-serif;font-size:24px;line-height:1.1;margin-top:4px;color:var(--text)}
+  .stat-card .v small{font-size:12px;color:var(--text-2);font-family:'Inter',sans-serif;font-weight:500}
+
+  .callout{border:1px solid var(--border-2);border-radius:14px;padding:24px 28px;background:linear-gradient(135deg,rgba(0,212,255,.06),rgba(255,45,146,.06)),var(--surface);margin-top:24px}
+  .callout h3{font-family:'Anton',sans-serif;font-size:20px;text-transform:uppercase;margin:0 0 10px;letter-spacing:.02em}
+  .callout p{margin:0 0 6px;color:var(--text-2);font-size:14px;line-height:1.55}
+  .callout p:last-child{margin-bottom:0}
+  .callout ul{margin:8px 0 0;padding-left:20px;color:var(--text-2);font-size:14px;line-height:1.7}
+  .callout b{color:var(--text)}
+
+  .qbar{display:grid;grid-template-columns:repeat(4,1fr);gap:14px;margin-top:20px}
+  @media (max-width:880px){.qbar{grid-template-columns:1fr 1fr}}
+  .qbar div{border:1px solid var(--border);border-left:3px solid var(--orange);border-radius:8px;padding:14px;background:var(--surface);font-size:13px;color:var(--text-2);line-height:1.5}
+  .qbar div b{display:block;font-family:'JetBrains Mono',monospace;font-size:10px;letter-spacing:.12em;text-transform:uppercase;color:var(--orange);margin-bottom:6px}
+
+  /* footer */
+  footer{padding:56px 28px;color:var(--text-3);font-size:12px}
+  footer .ft-grid{max-width:1280px;margin:0 auto;display:grid;grid-template-columns:repeat(3,1fr);gap:32px;text-align:left;margin-bottom:32px}
+  @media (max-width:880px){footer .ft-grid{grid-template-columns:1fr}}
+  footer h4{font-family:'Anton',sans-serif;font-size:16px;text-transform:uppercase;letter-spacing:.04em;color:var(--text);margin:0 0 8px}
+  footer p{color:var(--text-2);margin:0 0 6px;font-size:13px}
+
+  section[id]{scroll-margin-top:80px}
+</style>
+</head>
+<body>
+
+<nav class="nav">
+  <div class="nav-inner">
+    <div class="nav-brand"><span class="dot"></span>Dribble World</div>
+    <div class="nav-links">
+      <a href="#brief">Brief</a>
+      <a href="#long-passes">Long Passes</a>
+      <a href="#walk-along">Walk Along</a>
+      <a href="#open">Open</a>
+    </div>
+    <div class="nav-cta">v0.3 · post-meeting · 3dar × FIFA</div>
+  </div>
+</nav>
+
+<header class="hero">
+  <div class="hero-inner">
+    <div class="eyebrow">
+      <span class="pill">Post-meeting · May 5 2026</span>
+      <span>Two concepts · 3 environments · Alpha Phase</span>
+    </div>
+    <h1 class="hero-title">Dribble<br>World.</h1>
+    <p class="hero-sub">
+      Not a tunnel anymore — Nick wants the name <b style="color:var(--text)">Dribble World</b>. Walls and floor in LED, no LED ceiling (saves ~25% of LED budget). Two ideas survived the meeting: <b style="color:var(--text)">Long Passes</b> and <b style="color:var(--text)">Walk Along</b>. Yeon loves both — said in an ideal world we'd build both.
+    </p>
+    <div class="hero-meta">
+      <span><b>Format:</b> walls + floor LED · no ceiling LED</span>
+      <span><b>Alpha Phase:</b> 3 environments</span>
+      <span><b>Rights:</b> medium · works without famous players</span>
+      <span><b>No Messi.</b> Include Women's World Cup players.</span>
+    </div>
+  </div>
+</header>
+
+<section class="section" id="brief">
+  <div class="section-inner">
+    <div class="section-head">
+      <div>
+        <div class="section-num">§ 00 — POST-MEETING BRIEF</div>
+        <h2 class="section-title">What changed.</h2>
+      </div>
+      <p class="section-lede">
+        Latest from the May 5 weekly with Nick, Yeon, German, Federico. Both ideas were strongly received. Concept gets one extra month if a +1 month extension is granted by the client this week.
+      </p>
+    </div>
+
+    <div class="callout">
+      <h3>Settled in the meeting</h3>
+      <ul>
+        <li><b>Naming:</b> "Dribble World" — not "tunnel" (avoids confusion with another existing tunnel in the museum).</li>
+        <li><b>LED scope:</b> walls + floor only. No LED ceiling. Ceiling could be a fake sky (Caesar's Palace style). 25% cost saving on LED.</li>
+        <li><b>Three environments</b> for Alpha Phase. Yeon: <i>"I'd like to see three environments."</i></li>
+        <li><b>Rights:</b> classified as <b>medium</b> — concept works without famous-player rights, nice-to-have but not essential. Always have a backup plan if a player can't be cleared.</li>
+        <li><b>No Messi.</b> He has his own experience; he won't cede image rights to a competing one.</li>
+        <li><b>Women's World Cup players in scope.</b> Yeon explicitly asked Jorge to research emerging stars, "rising stars" not the obvious ones — global audience, US audience cares about women's game.</li>
+        <li><b>Both ideas loved.</b> Yeon: "in my ideal world, we would develop both."</li>
+        <li><b>+1 month possible.</b> Dribble World is the most movable of the three remaining activations; German asked for a one-month extension and extra budget.</li>
+      </ul>
+    </div>
+
+    <div class="row">
+      <div class="stat-card"><div class="k">Concepts</div><div class="v">2 <small>· Long Passes + Walk Along</small></div></div>
+      <div class="stat-card"><div class="k">Environments (Alpha)</div><div class="v">3</div></div>
+      <div class="stat-card"><div class="k">LED scope</div><div class="v">Walls <small>+ floor</small></div></div>
+      <div class="stat-card"><div class="k">Rights tier</div><div class="v">Medium</div></div>
+    </div>
+  </div>
+</section>
+
+<!-- ───────── LONG PASSES ───────── -->
+<section class="section" id="long-passes">
+  <div class="section-inner">
+    <div class="section-head">
+      <div>
+        <div class="section-num">§ 01 — IDEA ONE</div>
+        <h2 class="section-title">Long Passes.</h2>
+        <div style="margin-top:12px"><span class="tag cyan">CINEMATIC</span><span class="tag pink">RIGHTS · MEDIUM</span><span class="tag gold">3 ENVIRONMENTS</span></div>
+      </div>
+      <p class="section-lede">
+        Kid plays in their hometown. Kid hits a long pass. The ball flies along the wall LEDs, the length of Dribble World. At the far end, the same player — now an adult, in their team's colours — receives it on their chest and plays on. Then plays it back.
+      </p>
+    </div>
+
+    <div class="idea-hero idea-hero-tall">
+      <img src="images/7.png" alt="Curved LED tunnel reference with soccer scenes and stadium imagery">
+      <div class="idea-hero-caption"><b>Reference:</b> curved LED installation showing a multi-screen soccer environment. Walls + floor LED, no ceiling LED.</div>
+    </div>
+
+    <div class="idea-grid">
+      <div>
+        <p class="idea-pitch">Where it started → who they became. Connected by one ball.</p>
+        <p class="idea-desc">
+          You walk into Dribble World. The walls show <b>cities from around the world</b> — a Buenos Aires potrero, a Bondy concrete cage, a Bambali red-earth pitch, a Rio favela court, a tournament in a small French town. <b>Kids are playing.</b>
+        </p>
+        <p class="idea-desc">
+          One kid is highlighted. They drag the ball through two friends with a flick most ten-year-olds couldn't dream of. They look up. They <b>hit a long pass</b>.
+        </p>
+        <p class="idea-desc">
+          The ball <b>traces in slow motion across the wall LEDs</b> — the full length of Dribble World. Spatial audio carries the whoosh. If you walk with it, you follow it. At the far end, the <b>same player as an adult</b> — in their club colours — reads the pass, brings it down on their chest, and plays on. Then plays it back. Cycle continues.
+        </p>
+        <p class="idea-desc">
+          The same kid. The same pass. Eighteen years apart. The wall is the canvas, the visitor is the witness in the middle.
+        </p>
+      </div>
+      <aside class="idea-side">
+        <h4>Why it works</h4>
+        <p>The most cinematic moment in Dribble World. A single coherent narrative beat, easy to grasp, emotionally landed. Earns the wall-length scale — there's a reason it's wide.</p>
+        <h4>Rights story</h4>
+        <p>If we get player rights, we use real legends + their archival childhood photos. If we don't, we use <b>composite kids</b> + non-named pro-style adult footage. Either way, the idea reads.</p>
+        <h4>Women's World Cup hook</h4>
+        <p>Half the kid → adult pairings should be women players. Rising stars, not just the obvious names. <b>Action item: Jorge to research.</b></p>
+        <h4>Tech notes</h4>
+        <ul>
+          <li>Wall LED — high-res, edge-to-edge ball trajectory</li>
+          <li>Floor LED — soft pulse at takeoff and chest-trap</li>
+          <li>No ceiling LED needed for this one</li>
+          <li>Object-based spatial audio — pass whoosh travels with the ball</li>
+        </ul>
+        <h4>Three environments — first picks</h4>
+        <ul>
+          <li>Buenos Aires potrero (kid #1) → adult elsewhere</li>
+          <li>Rio favela court (kid #2) → adult elsewhere</li>
+          <li>French town tournament (kid #3) → adult elsewhere</li>
+        </ul>
+      </aside>
+    </div>
+
+    <h3 style="font-family:Anton;font-size:24px;text-transform:uppercase;letter-spacing:.04em;margin:48px 0 16px;color:var(--text-3)">The visual sequence</h3>
+    <div class="sequence">
+      <figure class="seq-step"><img src="images/11.png" alt="Favela soccer pitch — where it begins"><span class="seq-label">01 · the place</span></figure>
+      <div class="seq-arrow">→</div>
+      <figure class="seq-step"><img src="images/8.png" alt="Kid playing in his neighbourhood"><span class="seq-label">02 · the kid</span></figure>
+      <div class="seq-arrow">→</div>
+      <figure class="seq-step"><img src="images/9.png" alt="Adult chest-trapping the ball"><span class="seq-label">03 · the man</span></figure>
+    </div>
+
+    <h3 style="font-family:Anton;font-size:24px;text-transform:uppercase;letter-spacing:.04em;margin:56px 0 16px;color:var(--text-3)">Reference moodboard</h3>
+    <div class="gallery">
+      <figure><img src="images/12.png" alt="Kids together with a ball"><figcaption>Origin · the friend group</figcaption></figure>
+      <figure><img src="images/8.png" alt="Kid playing in cage"><figcaption>The kid · the cage</figcaption></figure>
+      <figure><img src="images/10.png" alt="Adult player flashy move"><figcaption>The flashy move</figcaption></figure>
+      <figure><img src="images/9.png" alt="Adult chest control"><figcaption>The chest trap · the landing</figcaption></figure>
+    </div>
+  </div>
+</section>
+
+<!-- ───────── WALK ALONG ───────── -->
+<section class="section" id="walk-along">
+  <div class="section-inner">
+    <div class="section-head">
+      <div>
+        <div class="section-num">§ 02 — IDEA TWO</div>
+        <h2 class="section-title">Walk Along.</h2>
+        <div style="margin-top:12px"><span class="tag cyan">INTERACTIVE</span><span class="tag green">SIMPLE TECH</span><span class="tag gold">SPONSORSHIP-READY</span></div>
+      </div>
+      <p class="section-lede">
+        Korean-experience reference. Characters on the wall LED follow you as you walk. Stand still and things happen. At the start of Dribble World, they're kids. By the end, they're the famous players — and you've walked their journey through clubs, cities and continents.
+      </p>
+    </div>
+
+    <div class="idea-hero idea-hero-tall">
+      <img src="images/4.png" alt="Curved LED corridor reference — visitor walking past wall projections">
+      <div class="idea-hero-caption"><b>Reference:</b> curved LED corridor where the wall content reacts to the visitor's position. Korean-style interactive experiences resolved with simple camera tracking.</div>
+    </div>
+
+    <div class="idea-grid">
+      <div>
+        <p class="idea-pitch">A character picks you. Walks with you. Grows up alongside you.</p>
+        <p class="idea-desc">
+          The wall LED detects you with a simple camera. A <b>character on the screen attaches to you</b> — they walk when you walk, stop when you stop. Stand still and they do tricks, juggle, shoot at the wall. Move on and they follow.
+        </p>
+        <p class="idea-desc">
+          At the start, your character is a <b>kid in their hometown</b>. As you progress through Dribble World, the wall <b>tells their story</b>: the streets they grew up on, the youth team that scouted them, the small club, the move abroad, the league they broke into, the team they play for now.
+        </p>
+        <p class="idea-desc">
+          By the time you reach the end, <b>your character is an adult superstar</b> in full kit, in their stadium. You walked their journey. They walked it with you.
+        </p>
+        <p class="idea-desc">
+          Multiple visitors = multiple characters at once on the wall — each one assigned, each one tracking its person. Saw this work in Korea — simple tech, strong result, a really fun thing to do.
+        </p>
+      </div>
+      <aside class="idea-side">
+        <h4>Why it works</h4>
+        <p>Yeon: <i>"It's easy. It's easy for people to understand."</i> Visitors instantly get it — character follows me, I walk, story unfolds. Zero learning curve.</p>
+        <h4>The avatar hook</h4>
+        <p>Could integrate the <b>FIFA avatars</b> the client is building — your avatar plays alongside the legend's. Could also use the <b>ball from the other games</b> as your character's ball. Slam-dunk cross-activation moment.</p>
+        <h4>Sponsorship spinoff</h4>
+        <p>Yeon flagged a <b>"kids zone" version</b> as a low-lift sponsorship opportunity — smaller LED wall, kids pick a character, mirror them, kick it back. "20 minutes of jumping jacks for a three-year-old." A great rights/sponsorship deal.</p>
+        <h4>Women's World Cup hook</h4>
+        <p>Same as Long Passes — half the character roster should be women players. Some young rising stars whose journey is JUST being written.</p>
+        <h4>Tech notes</h4>
+        <ul>
+          <li>Wall LED — main canvas</li>
+          <li>Single camera per zone — simple computer vision tracks people, assigns characters</li>
+          <li>Floor LED can show the character's path / trail</li>
+          <li>Audio shifts per chapter — childhood music → stadium roar</li>
+        </ul>
+      </aside>
+    </div>
+
+    <h3 style="font-family:Anton;font-size:24px;text-transform:uppercase;letter-spacing:.04em;margin:48px 0 16px;color:var(--text-3)">The progression</h3>
+    <div class="sequence">
+      <figure class="seq-step"><img src="images/12.png" alt="Childhood — friend group"><span class="seq-label">01 · childhood</span></figure>
+      <div class="seq-arrow">→</div>
+      <figure class="seq-step"><img src="images/8.png" alt="Solo kid practicing"><span class="seq-label">02 · the youth team</span></figure>
+      <div class="seq-arrow">→</div>
+      <figure class="seq-step"><img src="images/10.png" alt="Adult training session"><span class="seq-label">03 · breakthrough</span></figure>
+      <div class="seq-arrow">→</div>
+      <figure class="seq-step"><img src="images/9.png" alt="Adult superstar in club kit"><span class="seq-label">04 · the stadium</span></figure>
+    </div>
+
+    <h3 style="font-family:Anton;font-size:24px;text-transform:uppercase;letter-spacing:.04em;margin:56px 0 16px;color:var(--text-3)">Reference moodboard</h3>
+    <div class="gallery wide">
+      <figure><img src="images/4.png" alt="Curved LED tunnel installation"><figcaption>Curved LED corridor · visitor scale</figcaption></figure>
+      <figure><img src="images/6.png" alt="LED corridor purple"><figcaption>Single curved LED wall · ambient lighting</figcaption></figure>
+      <figure><img src="images/5.png" alt="Massive LED wall and floor"><figcaption>Wall + floor LED · interactive content</figcaption></figure>
+      <figure><img src="images/7.png" alt="Soccer-themed curved LED"><figcaption>Multi-screen soccer environment</figcaption></figure>
+    </div>
+  </div>
+</section>
+
+<!-- ───────── OPEN / NEXT ───────── -->
+<section class="section" id="open">
+  <div class="section-inner">
+    <div class="section-head">
+      <div>
+        <div class="section-num">§ 03 — OPEN + NEXT</div>
+        <h2 class="section-title">Where to land this week.</h2>
+      </div>
+      <p class="section-lede">Action items, open questions and decisions still to make so we can move into POC by end of June (or end of July with the +1 month extension).</p>
+    </div>
+
+    <div class="callout">
+      <h3>Action items from the meeting</h3>
+      <ul>
+        <li><b>Jorge:</b> research FIFA Women's World Cup emerging players + stories — feed into both ideas' player rosters.</li>
+        <li><b>German:</b> deliver weeks-timeline for Alpha Phase + spatial min/max dimensions for Dribble World.</li>
+        <li><b>The group:</b> visuals to share next week — even rough conceptual sketches. Yeon: "early and often" beats "polished and late."</li>
+      </ul>
+    </div>
+
+    <div class="callout" style="margin-top:14px">
+      <h3>Open questions still to resolve</h3>
+      <div class="qbar">
+        <div><b>Three environments</b>Which 3 cities make Alpha? Mix of men + women players, mix of continents.</div>
+        <div><b>Player rights backups</b>For each chosen player, who's the swap if we can't clear them?</div>
+        <div><b>+1 month?</b>Client decision expected end of week. Buys planning + VR previs time.</div>
+        <div><b>Concept blend</b>Build both ideas, or pick one for Alpha? Yeon's instinct: build both. Nick's: maybe spinoff Walk Along to a kids zone.</div>
+      </div>
+    </div>
+
+    <div class="callout" style="margin-top:14px">
+      <h3>Connection to other activations</h3>
+      <p>Three creative partners total — Nick called it <b>"the tribunal."</b> Once everything's confirmed, the partners will meet to align on flow + branding. Generic skinning to start (no team rights yet). Dribble World should feel like a <b>natural lead-in</b> to whatever it connects to (originally the immersive pitch — now slowly dying as an idea).</p>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <div class="ft-grid">
+    <div>
+      <h4>What this is</h4>
+      <p>Round 3 — narrowed to the two ideas Jorge presented in the May 5 weekly. Both received well; both kept here for development.</p>
+    </div>
+    <div>
+      <h4>What's next</h4>
+      <p>Develop visuals (Jorge). Pick the 3 environments. Research Women's World Cup rising stars. Wait on +1 month decision from client by end of week.</p>
+    </div>
+    <div>
+      <h4>Sources</h4>
+      <p><a href="https://www.fifapitch.com/phase1-revised/">Phase 1 revised brief</a> · May 5 weekly meeting transcript · <a href="https://docs.google.com/presentation/d/1QZThH_dFgq5OdJVm3UqfNFLkxpfzeDCpghSeqS_xZMs/edit">Original client deck</a></p>
+    </div>
+  </div>
+  <p style="margin-top:24px;color:var(--text-3)">3dar × FIFA · Dribble World · v0.3 (post-meeting)</p>
+</footer>
+
+</body>
+</html>
