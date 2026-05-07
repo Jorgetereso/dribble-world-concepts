@@ -3,7 +3,7 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Dribble World — Long Passes + Walk Along · 3dar × FIFA</title>
+<title>Around the World — Long Passes + Walk Along · 3dar × FIFA</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Anton&family=Inter:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;600&display=swap" rel="stylesheet">
@@ -128,6 +128,22 @@
   .qbar div{border:1px solid var(--border);border-left:3px solid var(--orange);border-radius:8px;padding:14px;background:var(--surface);font-size:13px;color:var(--text-2);line-height:1.5}
   .qbar div b{display:block;font-family:'JetBrains Mono',monospace;font-size:10px;letter-spacing:.12em;text-transform:uppercase;color:var(--orange);margin-bottom:6px}
 
+  /* universal everything reference */
+  .ue-quote{margin:24px 0 32px;padding:28px 32px;border-left:3px solid var(--cyan);background:linear-gradient(90deg,rgba(0,212,255,.08),rgba(157,107,255,.04) 60%,transparent);border-radius:0 14px 14px 0}
+  .ue-quote p{font-family:'Anton',sans-serif;font-size:clamp(22px,2.6vw,36px);line-height:1.15;text-transform:uppercase;letter-spacing:.005em;margin:0 0 10px;color:var(--text)}
+  .ue-quote span{font-family:'JetBrains Mono',monospace;font-size:11px;color:var(--text-3);letter-spacing:.12em;text-transform:uppercase}
+  .ue-link{display:inline-flex;align-items:center;gap:8px;margin-top:14px;font-family:'JetBrains Mono',monospace;font-size:12px;letter-spacing:.06em;color:var(--cyan);text-transform:uppercase}
+
+  .ref-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:14px;margin-top:24px}
+  @media (max-width:920px){.ref-grid{grid-template-columns:repeat(2,1fr)}}
+  @media (max-width:600px){.ref-grid{grid-template-columns:1fr}}
+  .ref-card{display:block;border:1px solid var(--border);border-radius:12px;padding:20px 22px;background:var(--surface);transition:border-color .2s,transform .2s;color:inherit;text-decoration:none}
+  .ref-card:hover{border-color:var(--cyan);transform:translateY(-2px);text-decoration:none}
+  .ref-card .meta{font-family:'JetBrains Mono',monospace;font-size:10px;color:var(--text-3);letter-spacing:.1em;text-transform:uppercase;margin-bottom:10px;line-height:1.5}
+  .ref-card h5{font-family:'Anton',sans-serif;font-size:22px;text-transform:uppercase;letter-spacing:.02em;margin:0 0 8px;color:var(--text);line-height:1.05}
+  .ref-card p{margin:0;color:var(--text-2);font-size:13px;line-height:1.55}
+  .ref-card .why{margin-top:12px;padding-top:12px;border-top:1px solid var(--border);font-size:12px;color:var(--cyan);line-height:1.5}
+
   /* footer */
   footer{padding:56px 28px;color:var(--text-3);font-size:12px}
   footer .ft-grid{max-width:1280px;margin:0 auto;display:grid;grid-template-columns:repeat(3,1fr);gap:32px;text-align:left;margin-bottom:32px}
@@ -142,14 +158,15 @@
 
 <nav class="nav">
   <div class="nav-inner">
-    <div class="nav-brand"><span class="dot"></span>Dribble World</div>
+    <div class="nav-brand"><span class="dot"></span>Around the World</div>
     <div class="nav-links">
       <a href="#brief">Brief</a>
+      <a href="#reference">Reference</a>
       <a href="#long-passes">Long Passes</a>
       <a href="#walk-along">Walk Along</a>
       <a href="#open">Open</a>
     </div>
-    <div class="nav-cta">v0.3 · post-meeting · 3dar × FIFA</div>
+    <div class="nav-cta">v0.4 · post-meeting · 3dar × FIFA</div>
   </div>
 </nav>
 
@@ -159,9 +176,9 @@
       <span class="pill">Post-meeting · May 5 2026</span>
       <span>Two concepts · 3 environments · Alpha Phase</span>
     </div>
-    <h1 class="hero-title">Dribble<br>World.</h1>
+    <h1 class="hero-title">Around the<br>World.</h1>
     <p class="hero-sub">
-      Not a tunnel anymore — Nick wants the name <b style="color:var(--text)">Dribble World</b>. Walls and floor in LED, no LED ceiling (saves ~25% of LED budget). Two ideas survived the meeting: <b style="color:var(--text)">Long Passes</b> and <b style="color:var(--text)">Walk Along</b>. Yeon loves both — said in an ideal world we'd build both.
+      The experience formerly working-titled "Dribble World" is now <b style="color:var(--text)">Around the World</b>. Walls and floor in LED, no LED ceiling (saves ~25% of LED budget). Two ideas survived the May 5 meeting: <b style="color:var(--text)">Long Passes</b> and <b style="color:var(--text)">Walk Along</b>. Yeon loves both — said in an ideal world we'd build both.
     </p>
     <div class="hero-meta">
       <span><b>Format:</b> walls + floor LED · no ceiling LED</span>
@@ -187,14 +204,14 @@
     <div class="callout">
       <h3>Settled in the meeting</h3>
       <ul>
-        <li><b>Naming:</b> "Dribble World" — not "tunnel" (avoids confusion with another existing tunnel in the museum).</li>
+        <li><b>Naming:</b> "Around the World" — current name. Iterates on the May 5 working title "Dribble World" (which itself replaced "tunnel" to avoid confusion with another existing tunnel in the museum).</li>
         <li><b>LED scope:</b> walls + floor only. No LED ceiling. Ceiling could be a fake sky (Caesar's Palace style). 25% cost saving on LED.</li>
         <li><b>Three environments</b> for Alpha Phase. Yeon: <i>"I'd like to see three environments."</i></li>
         <li><b>Rights:</b> classified as <b>medium</b> — concept works without famous-player rights, nice-to-have but not essential. Always have a backup plan if a player can't be cleared.</li>
         <li><b>No Messi.</b> He has his own experience; he won't cede image rights to a competing one.</li>
         <li><b>Women's World Cup players in scope.</b> Yeon explicitly asked Jorge to research emerging stars, "rising stars" not the obvious ones — global audience, US audience cares about women's game.</li>
         <li><b>Both ideas loved.</b> Yeon: "in my ideal world, we would develop both."</li>
-        <li><b>+1 month possible.</b> Dribble World is the most movable of the three remaining activations; German asked for a one-month extension and extra budget.</li>
+        <li><b>+1 month possible.</b> Around the World is the most movable of the three remaining activations; German asked for a one-month extension and extra budget.</li>
       </ul>
     </div>
 
@@ -207,17 +224,127 @@
   </div>
 </section>
 
+<!-- ───────── UNIVERSAL EVERYTHING REFERENCE ───────── -->
+<section class="section" id="reference">
+  <div class="section-inner">
+    <div class="section-head">
+      <div>
+        <div class="section-num">§ 01 — VISUAL REFERENCE</div>
+        <h2 class="section-title">Universal Everything.</h2>
+        <div style="margin-top:12px"><span class="tag cyan">VISUAL LANGUAGE</span><span class="tag pink">ARCHITECTURAL SCALE</span><span class="tag gold">MOTION</span><span class="tag green">CHOREOGRAPHY</span></div>
+      </div>
+      <p class="section-lede">
+        Heavyweight reference. UE is the studio whose practice — building-scale LED facades, choreographed human motion, generative content systems — most closely matches what we want Around the World to feel like.
+      </p>
+    </div>
+
+    <div class="ue-quote">
+      <p>"Collaborations with visionary people, brands and places."</p>
+      <span>— Universal Everything · Sheffield, UK · founded 2004</span>
+    </div>
+
+    <div class="callout">
+      <h3>Why they're THE reference</h3>
+      <ul>
+        <li><b>Spatial integration:</b> LED treated as architecture, not a screen. 30-meter facades, 24-meter multi-panel arrays, projection on iconic buildings — content responds to venue geometry. <i>Around the World is exactly this — walls + floor as one architectural surface, not a video player.</i></li>
+        <li><b>Motion is the language:</b> abstract human silhouettes, choreographed crowds, fluid generative forms. <i>Walk Along's character that tracks visitors lives directly in this vocabulary.</i></li>
+        <li><b>Generative systems within structured frameworks:</b> "Faces" produced 20,000 unique algorithmic portraits; "Hyundai Vision Hall" cycles 18 artworks across one wall. <i>Maps directly to our 3 rotatable environments and rights-flexible content.</i></li>
+        <li><b>Cross-medium thinking:</b> immersive video, interactive installations, AR, lenticular media, projection. <i>Pushes us beyond "video on a wall" toward camera-tracked, avatar-blended, sensor-driven moments.</i></li>
+      </ul>
+      <a class="ue-link" href="https://www.universaleverything.com/experience-design" target="_blank" rel="noopener">universaleverything.com/experience-design →</a>
+    </div>
+
+    <h3 style="font-family:Anton;font-size:24px;text-transform:uppercase;letter-spacing:.04em;margin:48px 0 16px;color:var(--text-3)">Most relevant projects</h3>
+
+    <div class="ref-grid">
+      <a class="ref-card" href="https://www.universaleverything.com/experience-design" target="_blank" rel="noopener">
+        <div class="meta">The Hyundai · Seoul · 30m media facade</div>
+        <h5>Superconsumers</h5>
+        <p>Pop art at architectural scale on a 30-meter LED department-store facade. Digital saturation × built environment.</p>
+        <div class="why">Scale precedent. Justifies wall-length cinematic moments — the Long Passes ball arc traveling the length of the room.</div>
+      </a>
+
+      <a class="ref-card" href="https://www.universaleverything.com/experience-design" target="_blank" rel="noopener">
+        <div class="meta">Hyundai Motor · Seoul · 24m multi-panel</div>
+        <h5>Hyundai Vision Hall</h5>
+        <p>18 separate artworks rotating across a 24-meter hi-res facade. Kinetic abstraction as content architecture.</p>
+        <div class="why">The exact model for our 3 environments — one wall, multiple stories, swappable content as rights/seasons change.</div>
+      </a>
+
+      <a class="ref-card" href="https://www.universaleverything.com/experience-design" target="_blank" rel="noopener">
+        <div class="meta">Sydney Opera House · Architectural projection</div>
+        <h5>Living Mural</h5>
+        <p>Collaborative projection mapped to the Opera House's iconic shell geometry — content respecting architecture.</p>
+        <div class="why">Proof that the wall isn't a flat canvas — it's a venue. Content should be designed around our space, not stretched across it.</div>
+      </a>
+
+      <a class="ref-card" href="https://www.universaleverything.com/experience-design" target="_blank" rel="noopener">
+        <div class="meta">Hyundai Motorstudio · Jakarta · immersive video</div>
+        <h5>Made by Humans</h5>
+        <p>Choreographed human-figure abstraction used as visual metaphor for craft and labor.</p>
+        <div class="why">Closest aesthetic ancestor of the Walk Along character — abstracted human silhouettes, full presence, no uncanny-valley.</div>
+      </a>
+
+      <a class="ref-card" href="https://www.universaleverything.com/experience-design" target="_blank" rel="noopener">
+        <div class="meta">Hyundai Motorstudio · Jakarta · video wall</div>
+        <h5>Collective Behaviour</h5>
+        <p>Synchronized crowds of abstract figures showing collective energy through pattern, density, flow.</p>
+        <div class="why">For the kid scenes in Long Passes — the friend group, the favela court, the cage. Many bodies, one shared rhythm.</div>
+      </a>
+
+      <a class="ref-card" href="https://www.universaleverything.com/experience-design" target="_blank" rel="noopener">
+        <div class="meta">Radiohead · worldwide · AR environment</div>
+        <h5>Polyfauna</h5>
+        <p>Immersive AR environment created with the band — generative landscapes that respond to the user.</p>
+        <div class="why">Spiritual cousin of Walk Along: a visitor-attached visual companion that builds a world around you as you move.</div>
+      </a>
+
+      <a class="ref-card" href="https://www.universaleverything.com/experience-design" target="_blank" rel="noopener">
+        <div class="meta">Microsoft · San Francisco · big-data installation</div>
+        <h5>Infinity Room</h5>
+        <p>Walk-through installation visualizing infinite scale and data complexity.</p>
+        <div class="why">Architectural precedent for an immersive walk-through experience anchored in a single visual concept.</div>
+      </a>
+
+      <a class="ref-card" href="https://www.universaleverything.com/experience-design" target="_blank" rel="noopener">
+        <div class="meta">Chanel · HK / Tokyo / Shanghai / LA</div>
+        <h5>The Five Codes of Chanel</h5>
+        <p>Restrained, minimalist films across global LED facades — luxury without spectacle.</p>
+        <div class="why">Permission to be quiet on the wall. The Long Passes slow-motion arc earns its silence — not every second has to be loud.</div>
+      </a>
+
+      <a class="ref-card" href="https://www.universaleverything.com/experience-design" target="_blank" rel="noopener">
+        <div class="meta">Hyundai Motorstudio · Jakarta · immersive film + interactive</div>
+        <h5>Hydrogen Wave</h5>
+        <p>Walk-through narrative experience about green-steel production, told through animated sequences.</p>
+        <div class="why">A walk-through narrative inside an architectural LED space — same delivery format as Around the World.</div>
+      </a>
+    </div>
+
+    <div class="callout" style="margin-top:32px">
+      <h3>What we're stealing</h3>
+      <ul>
+        <li><b>The brief:</b> stop describing "screens" — describe surfaces, geometry, atmosphere.</li>
+        <li><b>The motion:</b> design movement as choreography, not animation. Camera-led, not edit-led.</li>
+        <li><b>The scale strategy:</b> one big idea owns the full wall — no splitting it into busy panels.</li>
+        <li><b>The variation system:</b> structured frameworks that allow content to swap (players, cities, seasons) without rebuilding.</li>
+        <li><b>The cross-medium ambition:</b> wall LED + floor LED + camera tracking + audio + (eventually) avatars + ball — treat them as one instrument, not five.</li>
+      </ul>
+    </div>
+  </div>
+</section>
+
 <!-- ───────── LONG PASSES ───────── -->
 <section class="section" id="long-passes">
   <div class="section-inner">
     <div class="section-head">
       <div>
-        <div class="section-num">§ 01 — IDEA ONE</div>
+        <div class="section-num">§ 02 — IDEA ONE</div>
         <h2 class="section-title">Long Passes.</h2>
         <div style="margin-top:12px"><span class="tag cyan">CINEMATIC</span><span class="tag pink">RIGHTS · MEDIUM</span><span class="tag gold">3 ENVIRONMENTS</span></div>
       </div>
       <p class="section-lede">
-        Kid plays in their hometown. Kid hits a long pass. The ball flies along the wall LEDs, the length of Dribble World. At the far end, the same player — now an adult, in their team's colours — receives it on their chest and plays on. Then plays it back.
+        Kid plays in their hometown. Kid hits a long pass. The ball flies along the wall LEDs, the length of Around the World. At the far end, the same player — now an adult, in their team's colours — receives it on their chest and plays on. Then plays it back.
       </p>
     </div>
 
@@ -230,13 +357,13 @@
       <div>
         <p class="idea-pitch">Where it started → who they became. Connected by one ball.</p>
         <p class="idea-desc">
-          You walk into Dribble World. The walls show <b>cities from around the world</b> — a Buenos Aires potrero, a Bondy concrete cage, a Bambali red-earth pitch, a Rio favela court, a tournament in a small French town. <b>Kids are playing.</b>
+          You walk into Around the World. The walls show <b>cities from around the world</b> — a Buenos Aires potrero, a Bondy concrete cage, a Bambali red-earth pitch, a Rio favela court, a tournament in a small French town. <b>Kids are playing.</b>
         </p>
         <p class="idea-desc">
           One kid is highlighted. They drag the ball through two friends with a flick most ten-year-olds couldn't dream of. They look up. They <b>hit a long pass</b>.
         </p>
         <p class="idea-desc">
-          The ball <b>traces in slow motion across the wall LEDs</b> — the full length of Dribble World. Spatial audio carries the whoosh. If you walk with it, you follow it. At the far end, the <b>same player as an adult</b> — in their club colours — reads the pass, brings it down on their chest, and plays on. Then plays it back. Cycle continues.
+          The ball <b>traces in slow motion across the wall LEDs</b> — the full length of Around the World. Spatial audio carries the whoosh. If you walk with it, you follow it. At the far end, the <b>same player as an adult</b> — in their club colours — reads the pass, brings it down on their chest, and plays on. Then plays it back. Cycle continues.
         </p>
         <p class="idea-desc">
           The same kid. The same pass. Eighteen years apart. The wall is the canvas, the visitor is the witness in the middle.
@@ -244,7 +371,7 @@
       </div>
       <aside class="idea-side">
         <h4>Why it works</h4>
-        <p>The most cinematic moment in Dribble World. A single coherent narrative beat, easy to grasp, emotionally landed. Earns the wall-length scale — there's a reason it's wide.</p>
+        <p>The most cinematic moment in Around the World. A single coherent narrative beat, easy to grasp, emotionally landed. Earns the wall-length scale — there's a reason it's wide.</p>
         <h4>Rights story</h4>
         <p>If we get player rights, we use real legends + their archival childhood photos. If we don't, we use <b>composite kids</b> + non-named pro-style adult footage. Either way, the idea reads.</p>
         <h4>Women's World Cup hook</h4>
@@ -289,12 +416,12 @@
   <div class="section-inner">
     <div class="section-head">
       <div>
-        <div class="section-num">§ 02 — IDEA TWO</div>
+        <div class="section-num">§ 03 — IDEA TWO</div>
         <h2 class="section-title">Walk Along.</h2>
         <div style="margin-top:12px"><span class="tag cyan">INTERACTIVE</span><span class="tag green">SIMPLE TECH</span><span class="tag gold">SPONSORSHIP-READY</span></div>
       </div>
       <p class="section-lede">
-        Korean-experience reference. Characters on the wall LED follow you as you walk. Stand still and things happen. At the start of Dribble World, they're kids. By the end, they're the famous players — and you've walked their journey through clubs, cities and continents.
+        Korean-experience reference. Characters on the wall LED follow you as you walk. Stand still and things happen. At the start of Around the World, they're kids. By the end, they're the famous players — and you've walked their journey through clubs, cities and continents.
       </p>
     </div>
 
@@ -310,7 +437,7 @@
           The wall LED detects you with a simple camera. A <b>character on the screen attaches to you</b> — they walk when you walk, stop when you stop. Stand still and they do tricks, juggle, shoot at the wall. Move on and they follow.
         </p>
         <p class="idea-desc">
-          At the start, your character is a <b>kid in their hometown</b>. As you progress through Dribble World, the wall <b>tells their story</b>: the streets they grew up on, the youth team that scouted them, the small club, the move abroad, the league they broke into, the team they play for now.
+          At the start, your character is a <b>kid in their hometown</b>. As you progress through Around the World, the wall <b>tells their story</b>: the streets they grew up on, the youth team that scouted them, the small club, the move abroad, the league they broke into, the team they play for now.
         </p>
         <p class="idea-desc">
           By the time you reach the end, <b>your character is an adult superstar</b> in full kit, in their stadium. You walked their journey. They walked it with you.
@@ -364,7 +491,7 @@
   <div class="section-inner">
     <div class="section-head">
       <div>
-        <div class="section-num">§ 03 — OPEN + NEXT</div>
+        <div class="section-num">§ 04 — OPEN + NEXT</div>
         <h2 class="section-title">Where to land this week.</h2>
       </div>
       <p class="section-lede">Action items, open questions and decisions still to make so we can move into POC by end of June (or end of July with the +1 month extension).</p>
@@ -374,7 +501,7 @@
       <h3>Action items from the meeting</h3>
       <ul>
         <li><b>Jorge:</b> research FIFA Women's World Cup emerging players + stories — feed into both ideas' player rosters.</li>
-        <li><b>German:</b> deliver weeks-timeline for Alpha Phase + spatial min/max dimensions for Dribble World.</li>
+        <li><b>German:</b> deliver weeks-timeline for Alpha Phase + spatial min/max dimensions for Around the World.</li>
         <li><b>The group:</b> visuals to share next week — even rough conceptual sketches. Yeon: "early and often" beats "polished and late."</li>
       </ul>
     </div>
@@ -391,7 +518,7 @@
 
     <div class="callout" style="margin-top:14px">
       <h3>Connection to other activations</h3>
-      <p>Three creative partners total — Nick called it <b>"the tribunal."</b> Once everything's confirmed, the partners will meet to align on flow + branding. Generic skinning to start (no team rights yet). Dribble World should feel like a <b>natural lead-in</b> to whatever it connects to (originally the immersive pitch — now slowly dying as an idea).</p>
+      <p>Three creative partners total — Nick called it <b>"the tribunal."</b> Once everything's confirmed, the partners will meet to align on flow + branding. Generic skinning to start (no team rights yet). Around the World should feel like a <b>natural lead-in</b> to whatever it connects to (originally the immersive pitch — now slowly dying as an idea).</p>
     </div>
   </div>
 </section>
@@ -400,7 +527,7 @@
   <div class="ft-grid">
     <div>
       <h4>What this is</h4>
-      <p>Round 3 — narrowed to the two ideas Jorge presented in the May 5 weekly. Both received well; both kept here for development.</p>
+      <p>Round 4 — renamed to "Around the World" and grounded in Universal Everything as the master visual reference. Two concepts kept (Long Passes + Walk Along).</p>
     </div>
     <div>
       <h4>What's next</h4>
@@ -408,10 +535,10 @@
     </div>
     <div>
       <h4>Sources</h4>
-      <p><a href="https://www.fifapitch.com/phase1-revised/">Phase 1 revised brief</a> · May 5 weekly meeting transcript · <a href="https://docs.google.com/presentation/d/1QZThH_dFgq5OdJVm3UqfNFLkxpfzeDCpghSeqS_xZMs/edit">Original client deck</a></p>
+      <p><a href="https://www.fifapitch.com/phase1-revised/">Phase 1 revised brief</a> · May 5 weekly meeting transcript · <a href="https://docs.google.com/presentation/d/1QZThH_dFgq5OdJVm3UqfNFLkxpfzeDCpghSeqS_xZMs/edit">Original client deck</a> · <a href="https://www.universaleverything.com/experience-design">Universal Everything reference</a></p>
     </div>
   </div>
-  <p style="margin-top:24px;color:var(--text-3)">3dar × FIFA · Dribble World · v0.3 (post-meeting)</p>
+  <p style="margin-top:24px;color:var(--text-3)">3dar × FIFA · Around the World · v0.4 (post-meeting · UE reference added)</p>
 </footer>
 
 </body>
