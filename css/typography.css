@@ -1,0 +1,84 @@
+/* =====================================================================
+   3DAR x FIFA - Typography
+   Cargá esto despues de los tokens. Asume que --font-display, --font-body
+   y --font-mono están definidos en el theme correspondiente.
+   ===================================================================== */
+
+/* Default = light cond stack. Cambiá según zona si hace falta */
+:root {
+  --font-display: 'New Amsterdam', 'Arial Narrow', sans-serif;
+  --font-body:    'Inter Tight', 'Inter', 'Segoe UI', sans-serif;
+  --font-mono:    'JetBrains Mono', ui-monospace, monospace;
+}
+
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+html { scroll-behavior: smooth; font-size: 18px; }
+
+body {
+  font-family: var(--font-body);
+  font-weight: 500;
+  font-size: 19px;
+  line-height: 1.72;
+  -webkit-font-smoothing: antialiased;
+  text-rendering: optimizeLegibility;
+}
+
+/* Display */
+h1, h2, h3, h4 {
+  font-family: var(--font-display);
+  font-weight: 400;
+  letter-spacing: 0.015em;
+  line-height: 1.05;
+}
+
+h1 { font-size: clamp(48px, 7vw, 96px); line-height: 0.96; letter-spacing: 0.01em; }
+h2 { font-size: clamp(34px, 4vw, 54px); line-height: 1.02; }
+h3 { font-size: clamp(28px, 2.5vw, 36px); line-height: 1.04; }
+h4 { font-size: 24px; line-height: 1.08; }
+
+/* <em> dentro de display = sin italic, sólo color de acento */
+h1 em, h2 em, h3 em, h4 em {
+  font-style: normal;
+  color: var(--accent, var(--gold));
+}
+
+/* Body */
+p, li, td {
+  font-size: 1.05rem;
+  line-height: 1.7;
+}
+
+/* Mono helper */
+.mono,
+.eyebrow,
+.section-label,
+.badge,
+.protocol-tag {
+  font-family: var(--font-mono);
+  font-weight: 600;
+  letter-spacing: 1.4px;
+  text-transform: uppercase;
+}
+
+/* Eyebrow / section label common */
+.eyebrow,
+.section-label {
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 2.6px;
+  color: var(--accent, var(--gold));
+}
+
+/* Selección */
+::selection { background: var(--accent, var(--gold)); color: #fff; }
+
+a { color: var(--accent, var(--gold)); text-decoration: none; }
+a:hover { text-decoration: underline; }
+
+/* Reduced motion */
+@media (prefers-reduced-motion: reduce) {
+  * {
+    animation-duration: 0.001ms !important;
+    transition-duration: 0.001ms !important;
+  }
+}

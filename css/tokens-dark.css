@@ -1,0 +1,68 @@
+/* =====================================================================
+   3DAR x FIFA - Dark theme tokens (Zona B - technical / control room)
+   ===================================================================== */
+
+:root {
+  /* Fondos */
+  --bg-deep:       #06080e;
+  --bg-dark:       #0a0f1a;
+  --bg-card:       #0c1120;
+  --bg-card-alt:   #0f1628;
+
+  /* Oro - primario */
+  --gold:          #d4a843;
+  --gold-light:    #f0d078;
+  --gold-dim:      #8a6f2a;
+
+  /* Texto */
+  --white:         #f0f0f0;
+  --white-dim:     #8899aa;
+
+  /* Acentos */
+  --accent:        #2a7fff;
+  --accent-dim:    #1a4f99;
+  --green:         #34d399;
+  --red:           #f87171;
+  --orange:        #fb923c;
+  --purple:        #a78bfa;
+
+  /* Bordes y glow */
+  --border:        rgba(212, 168, 67, 0.15);
+  --border-strong: rgba(212, 168, 67, 0.3);
+  --glow:          rgba(212, 168, 67, 0.08);
+
+  /* Layout */
+  --page-max:      1280px;
+  --section-pad:   clamp(48px, 6vw, 80px);
+  --slide-pad:     48px 64px;
+}
+
+/* Body base */
+body.dark {
+  background: var(--bg-deep);
+  color: var(--white);
+  font-family: 'Outfit', sans-serif;
+}
+
+/* Scanline overlay sutil "control room" */
+body.dark::after {
+  content: '';
+  position: fixed;
+  inset: 0;
+  background: repeating-linear-gradient(
+    0deg,
+    transparent,
+    transparent 2px,
+    rgba(255,255,255,0.008) 2px,
+    rgba(255,255,255,0.008) 4px
+  );
+  pointer-events: none;
+  z-index: 9999;
+}
+
+::selection { background: var(--gold); color: #fff; }
+
+* {
+  scrollbar-width: thin;
+  scrollbar-color: var(--gold-dim) transparent;
+}

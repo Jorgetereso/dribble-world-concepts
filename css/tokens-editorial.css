@@ -1,0 +1,61 @@
+/* =====================================================================
+   3DAR x FIFA - Editorial theme (sub-Zona C, paper-like)
+   Sin cards. Hairlines. Tipografía grande. Mucho espacio negativo.
+   ===================================================================== */
+
+:root {
+  --bg:        #f4f2ec;
+  --bg-soft:   #faf8f2;
+  --ink:       #111114;
+  --ink-mid:   #56565e;
+  --ink-dim:   #9a9aa0;
+  --hair:      #dedbd1;
+  --hair-soft: #e9e6dc;
+
+  --keep:      #0a7a3b;
+  --trim:      #b37a00;
+  --cut:       #b02a37;
+  --accent:    #b8860b;
+
+  --mono:      'JetBrains Mono', ui-monospace, monospace;
+  --sans:      'Inter Tight', system-ui, sans-serif;
+  --disp:      'New Amsterdam', Georgia, serif;
+
+  --page-max:  1180px;
+  --section-pad: clamp(48px, 7vw, 88px);
+}
+
+body.editorial {
+  font-family: var(--sans);
+  background: var(--bg);
+  color: var(--ink);
+  font-size: 17px;
+  line-height: 1.55;
+  -webkit-font-smoothing: antialiased;
+  text-rendering: optimizeLegibility;
+}
+
+::selection { background: var(--ink); color: var(--bg); }
+
+/* Wrap básico editorial */
+.wrap {
+  max-width: var(--page-max);
+  margin: 0 auto;
+  padding: 0 48px;
+}
+@media (max-width: 960px) { .wrap { padding: 0 32px; } }
+@media (max-width: 560px) { .wrap { padding: 0 18px; } }
+
+/* Hairline divider */
+.hr,
+.row + .row {
+  border-top: 1px solid var(--hair);
+}
+
+/* List sin cards - hairline divisor */
+.list-hair { list-style: none; }
+.list-hair li {
+  padding: 22px 0;
+  border-top: 1px solid var(--hair);
+}
+.list-hair li:first-child { border-top: 0; }

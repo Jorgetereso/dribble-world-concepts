@@ -1,0 +1,69 @@
+/* =====================================================================
+   3DAR x FIFA - Light theme tokens (Zona C)
+   Importar este archivo + typography.css + components.css
+   ===================================================================== */
+
+:root {
+  /* Fondos */
+  --bg:            #f8f7f4;
+  --bg-soft:       #fcfbf8;
+  --bg-card:       #ffffff;
+  --bg-alt:        #f2efe8;
+  --bg-nav:        #1a1a2e;
+
+  /* Texto */
+  --text:          #1a1a2e;
+  --text-mid:      #4a4a5a;
+  --text-dim:      #7a7a8a;
+
+  /* Bordes */
+  --border:        #e2e0d8;
+  --border-strong: #ccc9be;
+
+  /* Oro - acento primario / Phase 1 / Skills & Drills */
+  --gold:          #b8860b;
+  --gold-light:    #daa520;
+  --gold-bg:       #fdf6e3;
+  --gold-border:   #e6d5a0;
+
+  /* Azul - Phase 2 / Decision */
+  --blue:          #2563eb;
+  --blue-light:    #60a5fa;
+  --blue-bg:       #eff6ff;
+  --blue-border:   #bfdbfe;
+
+  /* Verde - success / POC / Mini Games */
+  --green:         #059669;
+  --green-bg:      #ecfdf5;
+  --green-border:  #a7f3d0;
+
+  /* Rojo - danger / cut */
+  --red:           #dc2626;
+  --red-bg:        #fef3f2;
+
+  /* Púrpura - Dribble Around the World */
+  --purple:        #7c3aed;
+  --purple-bg:     #f5f3ff;
+  --purple-border: #ddd6fe;
+
+  /* Naranja - caution */
+  --orange:        #d97706;
+  --orange-bg:     #fffbeb;
+  --orange-border: #fde68a;
+
+  /* Layout */
+  --page-max:      1280px;
+  --section-pad:   clamp(56px, 7vw, 96px);
+
+  /* Acento dinámico - se reasigna por body[data-pitch] */
+  --accent:        var(--gold);
+  --accent-bg:     var(--gold-bg);
+  --accent-border: var(--gold-border);
+}
+
+/* Per-installation accent overrides */
+body[data-pitch="skills"]    { --accent: var(--gold);   --accent-bg: var(--gold-bg);   --accent-border: var(--gold-border); }
+body[data-pitch="minigames"] { --accent: var(--green);  --accent-bg: var(--green-bg);  --accent-border: var(--green-border); }
+body[data-pitch="decision"]  { --accent: var(--blue);   --accent-bg: var(--blue-bg);   --accent-border: var(--blue-border); }
+body[data-pitch="dribble"]   { --accent: var(--purple); --accent-bg: var(--purple-bg); --accent-border: var(--purple-border); }
+body[data-pitch="timeline"]  { --accent: var(--text);   --accent-bg: var(--bg-alt);    --accent-border: var(--border-strong); }

@@ -1,278 +1,413 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="utf-8">
-<meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Dribble Around the World · 3DAR × FIFA</title>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Dribble Around the World · 3DAR x FIFA</title>
+
+<!-- Fonts (Zona C light cond stack per BRAND-MANUAL.md §5.2) -->
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Anton&family=Inter:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;600&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Inter+Tight:wght@300;400;500;600;700;800&family=New+Amsterdam&family=JetBrains+Mono:wght@400;500;600;700&display=swap" rel="stylesheet">
+
+<!-- Brand system -->
+<link rel="stylesheet" href="css/tokens-light.css">
+<link rel="stylesheet" href="css/typography.css">
+<link rel="stylesheet" href="css/components.css">
+
 <style>
-  :root{
-    /* base */
-    --bg:#06060a;
-    --surface:#11111a;
-    --surface-2:#171723;
-    --border:#22222e;
-    --border-2:#33334a;
-    --text:#f2f0ec;
-    --text-2:#a8a3b8;
-    --text-3:#6e6a7d;
-
-    /* installation accent: Dribble Around the World = purple */
-    --accent:#9d6bff;
-    --accent-2:#7c3aed;
-    --accent-soft:rgba(157,107,255,.10);
-    --accent-glow:rgba(157,107,255,.32);
-
-    /* phase 1 = gold (used as secondary chip) */
-    --phase1:#f5c842;
-
-    /* category accents (brainstorm tags only) */
-    --cat-visual:#4cc9ff;
-    --cat-interactive:#ff6aa8;
-    --cat-audio:#f5c842;
-    --cat-mechanic:#5cf0a4;
-    --cat-content:#9d6bff;
-    --cat-atmosphere:#ff8a4c;
-  }
-  *{box-sizing:border-box}
-  html,body{margin:0;padding:0;background:var(--bg);color:var(--text);font-family:'Inter',system-ui,sans-serif;line-height:1.55;-webkit-font-smoothing:antialiased}
-  body{overflow-x:hidden}
-  a{color:var(--accent);text-decoration:none}
-  a:hover{text-decoration:underline}
-
-  /* nav */
-  .nav{position:sticky;top:0;z-index:50;backdrop-filter:blur(14px);background:rgba(6,6,10,.78);border-bottom:1px solid var(--border)}
-  .nav-inner{max-width:1320px;margin:0 auto;padding:14px 28px;display:flex;align-items:center;gap:24px;flex-wrap:wrap}
-  .nav-brand{font-family:'Anton',sans-serif;font-size:18px;letter-spacing:.06em;text-transform:uppercase}
-  .nav-brand .dot{display:inline-block;width:8px;height:8px;border-radius:50%;background:var(--accent);margin-right:10px;box-shadow:0 0 12px var(--accent-glow)}
-  .nav-links{display:flex;gap:18px;flex-wrap:wrap;font-size:12px;font-weight:500;letter-spacing:.04em;text-transform:uppercase;color:var(--text-2)}
-  .nav-links a{color:var(--text-2);padding:6px 0}
-  .nav-links a:hover{color:var(--text);text-decoration:none}
-  .nav-cta{margin-left:auto;font-size:11px;color:var(--text-3);font-family:'JetBrains Mono',monospace}
-
-  /* hero */
-  .hero{position:relative;overflow:hidden;padding:96px 28px 80px;border-bottom:1px solid var(--border);
+  body {
     background:
-      radial-gradient(1100px 600px at 18% 12%,rgba(157,107,255,.20),transparent 60%),
-      radial-gradient(900px 520px at 82% 28%,rgba(124,58,237,.16),transparent 60%),
-      radial-gradient(700px 700px at 50% 100%,rgba(245,200,66,.05),transparent 60%),
-      linear-gradient(180deg,#05050a 0%,#0a0a14 100%);
+      radial-gradient(circle at 18% 0%, rgba(124, 58, 237, 0.05), transparent 28%),
+      radial-gradient(circle at 85% 12%, rgba(184, 134, 11, 0.04), transparent 24%),
+      linear-gradient(180deg, #fbfaf7 0%, var(--bg) 38%, #f4f1ea 100%);
+    color: var(--text);
+    min-height: 100vh;
   }
-  .hero::before{content:"";position:absolute;inset:0;
-    background-image:linear-gradient(rgba(255,255,255,.025) 1px,transparent 1px),linear-gradient(90deg,rgba(255,255,255,.025) 1px,transparent 1px);
-    background-size:48px 48px;
-    mask-image:radial-gradient(ellipse at center,black 30%,transparent 75%);pointer-events:none}
-  .hero-inner{max-width:1320px;margin:0 auto;position:relative}
-  .eyebrow{font-family:'JetBrains Mono',monospace;font-size:11px;letter-spacing:.18em;text-transform:uppercase;color:var(--accent);margin-bottom:18px;display:inline-flex;align-items:center;gap:14px;flex-wrap:wrap}
-  .eyebrow .chip{padding:3px 9px;border:1px solid var(--accent);border-radius:999px;font-size:10px;color:var(--accent)}
-  .eyebrow .chip.gold{border-color:var(--phase1);color:var(--phase1)}
-  h1.hero-title{font-family:'Anton',sans-serif;font-size:clamp(56px,10vw,168px);line-height:.9;letter-spacing:-.01em;text-transform:uppercase;margin:0 0 26px;
-    background:linear-gradient(180deg,#fff 0%,#cdb8ff 50%,#7c3aed 100%);
-    -webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent;text-shadow:0 0 80px var(--accent-glow)}
-  .hero-sub{font-size:clamp(16px,1.4vw,20px);max-width:820px;color:var(--text-2);margin:0}
-  .hero-sub b{color:var(--text);font-weight:600}
-  .scope{display:grid;grid-template-columns:repeat(4,1fr);gap:12px;margin-top:36px}
-  @media (max-width:880px){.scope{grid-template-columns:repeat(2,1fr)}}
-  .scope div{border:1px solid var(--border);border-radius:10px;padding:14px 16px;background:rgba(17,17,26,.6)}
-  .scope div .k{font-family:'JetBrains Mono',monospace;font-size:10px;color:var(--text-3);letter-spacing:.12em;text-transform:uppercase}
-  .scope div .v{font-family:'Anton',sans-serif;font-size:24px;line-height:1.1;margin-top:4px;color:var(--text)}
-  .scope div .v small{font-size:12px;color:var(--text-2);font-family:'Inter',sans-serif;font-weight:500;text-transform:none;letter-spacing:0}
 
-  /* sections */
-  .section{padding:84px 28px;border-bottom:1px solid var(--border)}
-  .section-inner{max-width:1320px;margin:0 auto}
-  .section-head{display:flex;flex-wrap:wrap;align-items:end;gap:24px;margin-bottom:32px}
-  .section-num{font-family:'JetBrains Mono',monospace;font-size:12px;color:var(--text-3);letter-spacing:.16em}
-  .section-title{font-family:'Anton',sans-serif;font-size:clamp(40px,5.5vw,76px);line-height:.95;text-transform:uppercase;margin:6px 0 0;letter-spacing:-.005em}
-  .section-lede{max-width:580px;color:var(--text-2);font-size:15px;margin-left:auto;line-height:1.6}
+  /* tighter section padding for a brainstorm board */
+  section { padding: calc(var(--section-pad) * 0.6) 0; }
+  section[id] { scroll-margin-top: 72px; }
 
-  /* full-bleed image hero (floor plan, origins) */
-  .visual{position:relative;border:1px solid var(--border);border-radius:14px;overflow:hidden;background:#000}
-  .visual img{display:block;width:100%;height:auto}
-  .visual-caption{display:flex;justify-content:space-between;align-items:center;gap:24px;flex-wrap:wrap;margin-top:14px;font-family:'JetBrains Mono',monospace;font-size:11px;color:var(--text-3);letter-spacing:.08em;text-transform:uppercase}
-  .visual-caption b{color:var(--text)}
+  /* exec strip extension: 4 cells, larger feel for the hero */
+  .exec-strip-4 {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 3px;
+    margin: 40px auto 0;
+    max-width: 920px;
+    border-radius: 14px;
+    overflow: hidden;
+  }
+  @media (max-width: 700px) { .exec-strip-4 { grid-template-columns: repeat(2, 1fr); } }
+  .exec-strip-4 .exec-item {
+    background: var(--bg-card);
+    border: 1px solid var(--border);
+    padding: 20px 16px;
+    text-align: center;
+  }
+  .exec-strip-4 .exec-val {
+    font-family: var(--font-mono);
+    font-size: 24px;
+    font-weight: 700;
+    color: var(--accent);
+    line-height: 1;
+  }
+  .exec-strip-4 .exec-val small {
+    display: block;
+    font-family: var(--font-body);
+    font-size: 12px;
+    font-weight: 500;
+    color: var(--text-mid);
+    margin-top: 6px;
+    letter-spacing: 0;
+    text-transform: none;
+  }
+  .exec-strip-4 .exec-label {
+    font-family: var(--font-mono);
+    font-size: 11px;
+    color: var(--text-dim);
+    font-weight: 600;
+    margin-top: 6px;
+    letter-spacing: 1.4px;
+    text-transform: uppercase;
+  }
 
-  /* spec strip under floor plan */
-  .specs{display:grid;grid-template-columns:repeat(4,1fr);gap:1px;margin-top:24px;background:var(--border);border:1px solid var(--border);border-radius:10px;overflow:hidden}
-  @media (max-width:760px){.specs{grid-template-columns:repeat(2,1fr)}}
-  .specs div{padding:18px 20px;background:var(--surface)}
-  .specs div .k{font-family:'JetBrains Mono',monospace;font-size:10px;color:var(--text-3);letter-spacing:.12em;text-transform:uppercase;margin-bottom:6px}
-  .specs div .v{font-family:'Anton',sans-serif;font-size:26px;line-height:1.1;color:var(--text)}
+  /* figure: bordered image specimen */
+  .fig {
+    border: 1px solid var(--border);
+    border-radius: 14px;
+    overflow: hidden;
+    background: #000;
+    margin: 28px 0 0;
+  }
+  .fig img { display: block; width: 100%; height: auto; }
+  .fig-caption {
+    display: flex;
+    justify-content: space-between;
+    align-items: baseline;
+    gap: 24px;
+    flex-wrap: wrap;
+    margin-top: 12px;
+    font-family: var(--font-mono);
+    font-size: 11px;
+    letter-spacing: 1.4px;
+    color: var(--text-dim);
+    text-transform: uppercase;
+    font-weight: 600;
+  }
+  .fig-caption b { color: var(--text); font-weight: 700; }
 
-  /* origins layout */
-  .protag-grid{display:grid;grid-template-columns:1fr 2.2fr;gap:36px;align-items:center}
-  @media (max-width:980px){.protag-grid{grid-template-columns:1fr}}
-  .protag-text p{color:var(--text-2);font-size:16px;line-height:1.7;margin:0 0 14px}
-  .protag-text p:last-child{margin-bottom:0}
-  .protag-text b{color:var(--text)}
+  /* spec strip (mono numbers) */
+  .specs {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 1px;
+    margin-top: 24px;
+    background: var(--border);
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    overflow: hidden;
+  }
+  @media (max-width: 720px) { .specs { grid-template-columns: repeat(2, 1fr); } }
+  .specs > div {
+    padding: 18px 20px;
+    background: var(--bg-card);
+  }
+  .spec-k {
+    font-family: var(--font-mono);
+    font-size: 10px;
+    color: var(--text-dim);
+    letter-spacing: 1.4px;
+    text-transform: uppercase;
+    font-weight: 700;
+    margin-bottom: 6px;
+  }
+  .spec-v {
+    font-family: var(--font-mono);
+    font-size: 22px;
+    font-weight: 700;
+    color: var(--text);
+    line-height: 1.05;
+  }
 
-  /* moodboard */
-  .gallery{display:grid;grid-template-columns:repeat(3,1fr);gap:14px}
-  @media (max-width:880px){.gallery{grid-template-columns:repeat(2,1fr)}}
-  @media (max-width:520px){.gallery{grid-template-columns:1fr}}
-  .gallery figure{margin:0;border:1px solid var(--border);border-radius:12px;overflow:hidden;background:#000;position:relative;aspect-ratio:4/3}
-  .gallery figure img{display:block;width:100%;height:100%;object-fit:cover;transition:transform .4s ease}
-  .gallery figure:hover img{transform:scale(1.04)}
+  /* moodboard 3-col bordered images */
+  .moodboard {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 14px;
+    margin-top: 8px;
+  }
+  @media (max-width: 880px) { .moodboard { grid-template-columns: repeat(2, 1fr); } }
+  @media (max-width: 520px) { .moodboard { grid-template-columns: 1fr; } }
+  .moodboard figure {
+    margin: 0;
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    overflow: hidden;
+    background: #000;
+    aspect-ratio: 4/3;
+  }
+  .moodboard figure img {
+    display: block;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: transform 0.4s ease;
+  }
+  .moodboard figure:hover img { transform: scale(1.04); }
 
-  /* UE reference */
-  .ue-wrap{display:grid;grid-template-columns:1fr 1.6fr;gap:32px;align-items:start}
-  @media (max-width:920px){.ue-wrap{grid-template-columns:1fr}}
-  .ue-text p{color:var(--text-2);font-size:15px;line-height:1.65;margin:0 0 14px}
-  .ue-text p:last-child{margin-bottom:0}
-  .ue-text b{color:var(--text)}
-  .ue-link{display:inline-flex;align-items:center;gap:8px;margin-top:8px;font-family:'JetBrains Mono',monospace;font-size:12px;letter-spacing:.06em;color:var(--accent);text-transform:uppercase}
-  .ue-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:10px}
-  .ue-grid figure{margin:0;border:1px solid var(--border);border-radius:10px;overflow:hidden;background:#000;aspect-ratio:16/9}
-  .ue-grid figure img{display:block;width:100%;height:100%;object-fit:cover}
-  .ue-credit{margin-top:14px;font-family:'JetBrains Mono',monospace;font-size:10px;color:var(--text-3);letter-spacing:.08em;text-transform:uppercase}
+  /* UE reference: 1.6fr text + grid */
+  .ue {
+    display: grid;
+    grid-template-columns: 1fr 1.6fr;
+    gap: 32px;
+    align-items: start;
+  }
+  @media (max-width: 920px) { .ue { grid-template-columns: 1fr; } }
+  .ue-text p { color: var(--text-mid); margin-bottom: 14px; max-width: 50ch; }
+  .ue-text p:last-child { margin-bottom: 0; }
+  .ue-text b { color: var(--text); font-weight: 700; }
+  .ue-link {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    margin-top: 8px;
+    font-family: var(--font-mono);
+    font-size: 11px;
+    letter-spacing: 1.4px;
+    color: var(--accent);
+    text-transform: uppercase;
+    font-weight: 700;
+  }
+  .ue-credit {
+    margin-top: 16px;
+    font-family: var(--font-mono);
+    font-size: 10px;
+    color: var(--text-dim);
+    letter-spacing: 1.2px;
+    text-transform: uppercase;
+  }
+  .ue-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 10px;
+  }
+  .ue-grid figure {
+    margin: 0;
+    border: 1px solid var(--border);
+    border-radius: 10px;
+    overflow: hidden;
+    background: #000;
+    aspect-ratio: 16/9;
+  }
+  .ue-grid figure img {
+    display: block;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
 
-  /* brainstorm */
-  .bs-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:12px;margin-top:8px}
-  @media (max-width:1100px){.bs-grid{grid-template-columns:repeat(3,1fr)}}
-  @media (max-width:760px){.bs-grid{grid-template-columns:repeat(2,1fr)}}
-  @media (max-width:480px){.bs-grid{grid-template-columns:1fr}}
-  .bs-card{position:relative;border:1px solid var(--border);border-radius:10px;padding:18px 16px 16px;background:var(--surface);transition:border-color .2s,transform .2s}
-  .bs-card:hover{border-color:var(--accent);transform:translateY(-2px)}
-  .bs-num{position:absolute;top:10px;right:12px;font-family:'JetBrains Mono',monospace;font-size:10px;color:var(--text-3);letter-spacing:.08em}
-  .bs-tag{display:inline-block;font-family:'JetBrains Mono',monospace;font-size:9px;letter-spacing:.1em;text-transform:uppercase;padding:3px 7px;border-radius:999px;border:1px solid var(--border-2);color:var(--text-2);margin-bottom:10px}
-  .bs-tag.visual{color:var(--cat-visual);border-color:rgba(76,201,255,.4)}
-  .bs-tag.interactive{color:var(--cat-interactive);border-color:rgba(255,106,168,.4)}
-  .bs-tag.audio{color:var(--cat-audio);border-color:rgba(245,200,66,.4)}
-  .bs-tag.mechanic{color:var(--cat-mechanic);border-color:rgba(92,240,164,.4)}
-  .bs-tag.content{color:var(--cat-content);border-color:rgba(157,107,255,.4)}
-  .bs-tag.atmosphere{color:var(--cat-atmosphere);border-color:rgba(255,138,76,.4)}
-  .bs-card h6{font-family:'Anton',sans-serif;font-size:18px;text-transform:uppercase;letter-spacing:.01em;margin:0 0 8px;color:var(--text);line-height:1.1}
-  .bs-card p{margin:0;color:var(--text-2);font-size:13px;line-height:1.5}
+  /* brainstorm: hairline list (homogeneous = no card capsules per manual §11) */
+  .bs-list {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 0;
+    margin-top: 8px;
+    border-top: 1px solid var(--border);
+    border-left: 1px solid var(--border);
+  }
+  @media (max-width: 980px) { .bs-list { grid-template-columns: repeat(2, 1fr); } }
+  @media (max-width: 600px) { .bs-list { grid-template-columns: 1fr; } }
+  .bs-item {
+    padding: 22px 24px 26px;
+    border-right: 1px solid var(--border);
+    border-bottom: 1px solid var(--border);
+    transition: background 0.18s;
+  }
+  .bs-item:hover { background: var(--accent-bg); }
+  .bs-meta {
+    display: flex;
+    gap: 12px;
+    align-items: baseline;
+    margin-bottom: 10px;
+    font-family: var(--font-mono);
+    font-size: 10px;
+    letter-spacing: 1.4px;
+    text-transform: uppercase;
+    font-weight: 700;
+  }
+  .bs-num { color: var(--text-dim); }
+  .bs-tag { color: var(--accent); }
+  .bs-title {
+    font-family: var(--font-display);
+    font-size: 24px;
+    line-height: 1.04;
+    letter-spacing: 0.005em;
+    color: var(--text);
+    margin: 0 0 8px;
+    font-weight: 400;
+  }
+  .bs-desc {
+    font-size: 15px;
+    color: var(--text-mid);
+    line-height: 1.55;
+    margin: 0;
+  }
 
-  /* footer */
-  footer{padding:48px 28px;color:var(--text-3);font-size:12px;text-align:center;font-family:'JetBrains Mono',monospace;letter-spacing:.08em}
-  footer p{margin:0;text-transform:uppercase}
+  /* origin stories: cinematic block */
+  .origins-pull {
+    display: grid;
+    grid-template-columns: 1fr 2.2fr;
+    gap: 36px;
+    align-items: start;
+    margin-top: 36px;
+  }
+  @media (max-width: 980px) { .origins-pull { grid-template-columns: 1fr; gap: 18px; } }
+  .origins-pull h3 {
+    font-family: var(--font-display);
+    font-size: clamp(28px, 3vw, 40px);
+    line-height: 1.05;
+    color: var(--text);
+    font-weight: 400;
+    margin: 0;
+  }
+  .origins-pull h3 em { font-style: normal; color: var(--accent); }
+  .origins-pull p {
+    color: var(--text-mid);
+    margin: 0 0 14px;
+    max-width: 56ch;
+  }
+  .origins-pull p:last-child { margin-bottom: 0; }
+  .origins-pull p b { color: var(--text); font-weight: 700; }
 
-  section[id]{scroll-margin-top:80px}
+  /* utility */
+  .mono-num { font-family: var(--font-mono); font-weight: 600; }
 </style>
 </head>
+
 <body data-pitch="dribble">
 
-<nav class="nav">
-  <div class="nav-inner">
-    <div class="nav-brand"><span class="dot"></span>Dribble Around the World</div>
-    <div class="nav-links">
+<!-- ============ TOPNAV ============ -->
+<nav class="topnav">
+  <div class="topnav-inner">
+    <span class="topnav-logo">3DAR / FIFA</span>
+    <div class="topnav-links">
       <a href="#installation">Installation</a>
-      <a href="#origins">Origin Stories</a>
+      <a href="#origins">Origins</a>
       <a href="#moodboard">Moodboard</a>
       <a href="#reference">Reference</a>
-      <a href="#brainstorm">Brainstorm</a>
+      <a href="#brainstorm" class="is-active">Brainstorm</a>
     </div>
-    <div class="nav-cta">3DAR × FIFA · Alpha Activation</div>
   </div>
 </nav>
 
-<header class="hero">
-  <div class="hero-inner">
-    <div class="eyebrow">
-      <span>Dribble Around the World</span>
-      <span class="chip">Alpha Activation</span>
-      <span class="chip gold">Phase 1</span>
-    </div>
-    <h1 class="hero-title">Around the<br>World.</h1>
-    <p class="hero-sub">
-      A walk-through experience for the FIFA museum. <b>Walls and floor in LED</b>, no ceiling. Visitors move through stories of players from across the world: where they grew up, who they became, the journey between. <b>Three environments</b> for Alpha Phase. Format is rights-flexible, so the concept works with named legends and with composite players.
-    </p>
-    <div class="scope">
-      <div><div class="k">Length</div><div class="v">60'-0"</div></div>
-      <div><div class="k">Clear width</div><div class="v">12'-0"</div></div>
-      <div><div class="k">LED</div><div class="v">Walls <small>+ floor</small></div></div>
-      <div><div class="k">Alpha Phase</div><div class="v">3 <small>environments</small></div></div>
+<!-- ============ HERO ============ -->
+<section class="hero">
+  <div class="container">
+    <span class="hero-eyebrow">Dribble Around the World / Phase 1 / Alpha Activation</span>
+    <h1>Around <em>the</em> World</h1>
+    <p class="hero-sub">A walk-through experience for the FIFA museum. Walls and floor in LED, no display ceiling. Visitors move through stories of players from across the world: where they grew up, who they became, the journey between. Three environments for Alpha Phase. Format is rights-flexible, so the concept works with named legends and with composite players.</p>
+
+    <div class="exec-strip-4">
+      <div class="exec-item">
+        <div class="exec-val">60'-0"</div>
+        <div class="exec-label">Length</div>
+      </div>
+      <div class="exec-item">
+        <div class="exec-val">12'-0"</div>
+        <div class="exec-label">Clear width</div>
+      </div>
+      <div class="exec-item">
+        <div class="exec-val">3<small>environments</small></div>
+        <div class="exec-label">Alpha Phase</div>
+      </div>
+      <div class="exec-item">
+        <div class="exec-val">LED<small>walls + floor</small></div>
+        <div class="exec-label">Surfaces</div>
+      </div>
     </div>
   </div>
-</header>
+</section>
 
-<!-- ───────── INSTALLATION / FLOOR PLAN ───────── -->
-<section class="section" id="installation">
-  <div class="section-inner">
+<!-- ============ INSTALLATION ============ -->
+<section id="installation">
+  <div class="container">
     <div class="section-head">
-      <div>
-        <div class="section-num">§ 01 · INSTALLATION</div>
-        <h2 class="section-title">Floor plan.</h2>
-      </div>
-      <p class="section-lede">Top view. Sixty feet long, twelve feet clear width. LED on both side walls and on the floor. Visitors enter on one end and exit on the other, watching one player's history unfold across the length of the room.</p>
+      <span class="section-label">§ 01 / Installation</span>
+      <h2 class="section-title">Floor plan</h2>
+      <p class="section-sub">Top view. Sixty feet long, twelve feet clear width. LED on both side walls and on the floor. Visitors enter on one end and exit on the other, watching one player's history unfold across the length of the room.</p>
     </div>
 
-    <div class="visual">
-      <img src="images/floor-plan.png" alt="Top-view floor plan of the Around the World installation showing 30 foot length, 6 foot 6 inch clear width, LED side walls and LED floor, with figures progressing from youth soccer (kids) on the entry side to professional soccer (adults) on the exit side.">
-    </div>
-    <div class="visual-caption">
-      <span><b>Floor plan</b> · top view · scale 1/4" = 1'-0"</span>
-      <span>Entry → Exit · Youth → Pro</span>
+    <figure class="fig">
+      <img src="images/floor-plan.png" alt="Top-view floor plan of the Around the World installation showing 60 foot length, 12 foot clear width, LED side walls and LED floor, with figures progressing from youth soccer (kids) on the entry side to professional soccer (adults) on the exit side.">
+    </figure>
+    <div class="fig-caption">
+      <span><b>Floor plan</b> / top view / scale 1/4" = 1'-0"</span>
+      <span>Entry &rarr; Exit / Youth &rarr; Pro</span>
     </div>
 
     <div class="specs">
-      <div><div class="k">Overall length</div><div class="v">60'-0"</div></div>
-      <div><div class="k">Clear width</div><div class="v">12'-0"</div></div>
-      <div><div class="k">LED surfaces</div><div class="v">Walls + floor</div></div>
-      <div><div class="k">Direction</div><div class="v">Linear walk-through</div></div>
+      <div><div class="spec-k">Overall length</div><div class="spec-v">60'-0"</div></div>
+      <div><div class="spec-k">Clear width</div><div class="spec-v">12'-0"</div></div>
+      <div><div class="spec-k">LED surfaces</div><div class="spec-v">Walls + floor</div></div>
+      <div><div class="spec-k">Direction</div><div class="spec-v">Linear</div></div>
     </div>
 
-    <div class="visual" style="margin-top:36px">
+    <figure class="fig">
       <img src="images/interior.png" alt="Interior render from a visitor's-eye view inside the installation. Two LED walls flank the room: favela streets with kids playing on the left, a packed Champions League stadium on the right. Visitors walk between them on a black floor with concentric circular LED light patterns. Linear LED strips run along the ceiling for ambient lighting.">
-    </div>
-    <div class="visual-caption">
-      <span><b>Visitor view A</b> · cinematic · favela on entry wall, Champions stadium on exit wall</span>
+    </figure>
+    <div class="fig-caption">
+      <span><b>Visitor view A</b> / cinematic / favela on entry, Champions stadium on exit</span>
       <span>LED walls + LED floor pattern + ambient ceiling strips</span>
     </div>
 
-    <div class="visual" style="margin-top:36px">
+    <figure class="fig">
       <img src="images/interior-2.png" alt="Second interior render variant. Two LED walls show women's football: girls in yellow Brazil-style number 10 kits playing in a colourful favela on the left, girls in white number 7 and number 2 kits on a grass pitch in front of suburban houses on the right. Magenta and cyan neon strips light the walls and the floor. The ceiling is an LED panel showing a purple and orange sunset sky.">
-    </div>
-    <div class="visual-caption">
-      <span><b>Visitor view B</b> · neon · women's football · favela girls vs. suburban-pitch girls</span>
+    </figure>
+    <div class="fig-caption">
+      <span><b>Visitor view B</b> / neon / women's football / favela girls vs. suburban-pitch girls</span>
       <span>LED walls + neon floor strips + sky-ceiling LED (Caesar's Palace style)</span>
     </div>
 
-    <div class="visual" style="margin-top:36px">
+    <figure class="fig">
       <img src="images/interior-3.png" alt="Third interior render variant. Two LED walls show kids playing in a favela on the left and girls playing on a grass pitch in front of suburban houses on the right. On-screen typography reads 'EVERY DREAM HAS A STARTING POINT' on the entry wall and 'EVERY STEP SHAPES THE FUTURE' on the exit wall. Warm white architectural LED strips line the ceiling, with curved white LED light patterns on the floor. Visitors of all ages walk through.">
-    </div>
-    <div class="visual-caption">
-      <span><b>Visitor view C</b> · restrained · with on-wall typography · "Every dream has a starting point" / "Every step shapes the future"</span>
+    </figure>
+    <div class="fig-caption">
+      <span><b>Visitor view C</b> / restrained / on-wall typography / "Every dream has a starting point" / "Every step shapes the future"</span>
       <span>LED walls + curved floor LED + warm ceiling strips (no display ceiling)</span>
     </div>
   </div>
 </section>
 
-<!-- ───────── ORIGIN STORIES ───────── -->
-<section class="section" id="origins">
-  <div class="section-inner">
+<!-- ============ ORIGIN STORIES ============ -->
+<section id="origins">
+  <div class="container">
     <div class="section-head">
-      <div>
-        <div class="section-num">§ 02 · ORIGIN STORIES</div>
-        <h2 class="section-title">Where heroes begin.</h2>
-      </div>
-      <p class="section-lede">Each environment tells one player's history across the room. Childhood streets, dream-big graffiti, the local pitch, the youth team, the move abroad, the breakthrough club, the Champions League roar. Visitors witness how the legend was made.</p>
+      <span class="section-label">§ 02 / Origin Stories</span>
+      <h2 class="section-title">Where heroes <em>begin</em></h2>
+      <p class="section-sub">Each environment tells one player's history across the room. Childhood streets, dream-big graffiti, the local pitch, the youth team, the move abroad, the breakthrough club, the Champions League roar. Visitors witness how the legend was made.</p>
     </div>
 
-    <div class="visual">
+    <figure class="fig">
       <img src="images/origins.png" alt="Wide panorama showing one player's history from a toddler kicking a ball in a favela, past dream-big graffiti, through youth club, university team, Bayern Munich, Juventus, to a Real Madrid Champions League celebration. The full origin story unfolds across the LED wall.">
-    </div>
-    <div class="visual-caption">
-      <span><b>Origin story · men's arc</b> · childhood to Champions across one wall</span>
-      <span>One player · one history · 60 feet</span>
+    </figure>
+    <div class="fig-caption">
+      <span><b>Origin story / men's arc</b> / childhood to Champions across one wall</span>
+      <span>One player / one history / 60 feet</span>
     </div>
 
-    <div class="visual" style="margin-top:36px">
+    <figure class="fig">
       <img src="images/origins-women.png" alt="Wide panorama showing a woman player's history from a toddler in pink kicking a ball outside a clapboard house with a US flag, through a kid running on a dirt road, a teen player against a sunset city skyline, a red European youth kit, a UCLA #17 college kit on a campus pitch, a study scene with a UCLA sweatshirt and laptop, a USA #17 white national kit, an FC Barcelona / Qatar Airways red-and-blue club kit, and ending in a USA #17 World Champions celebration with a trophy and 'WORLD CHAMPIONS' banner.">
-    </div>
-    <div class="visual-caption">
-      <span><b>Origin story · women's arc</b> · backyard to World Champions across one wall</span>
-      <span>One player · one history · 60 feet</span>
+    </figure>
+    <div class="fig-caption">
+      <span><b>Origin story / women's arc</b> / backyard to World Champions across one wall</span>
+      <span>One player / one history / 60 feet</span>
     </div>
 
-    <div class="protag-grid" style="margin-top:36px">
-      <div class="protag-text">
-        <p>Eighteen years of history compressed into sixty feet.</p>
-      </div>
-      <div class="protag-text">
+    <div class="origins-pull">
+      <h3>Eighteen years compressed into <em>sixty feet.</em></h3>
+      <div>
         <p>The wall is the timeline. Same hero, traced from where they started to where they ended up. The floor pulls you forward through the years, and the story accumulates as you walk.</p>
         <p>Rights-flexible by design. With clearance, the history is real, named, archival. Without it, a composite life maps the same arc. <b>The story reads either way.</b></p>
       </div>
@@ -280,18 +415,16 @@
   </div>
 </section>
 
-<!-- ───────── MOODBOARD ───────── -->
-<section class="section" id="moodboard">
-  <div class="section-inner">
+<!-- ============ MOODBOARD ============ -->
+<section id="moodboard">
+  <div class="container">
     <div class="section-head">
-      <div>
-        <div class="section-num">§ 03 · MOODBOARD</div>
-        <h2 class="section-title">The visual seed.</h2>
-      </div>
-      <p class="section-lede">Reference imagery for the room and the player histories. LED architecture, kids on the pitch, adult moments, family album textures.</p>
+      <span class="section-label">§ 03 / Moodboard</span>
+      <h2 class="section-title">The visual seed</h2>
+      <p class="section-sub">Reference imagery for the room and the player histories. LED architecture, kids on the pitch, adult moments, family-album textures.</p>
     </div>
 
-    <div class="gallery">
+    <div class="moodboard">
       <figure><img src="images/4.png" alt="Curved LED tunnel reference"></figure>
       <figure><img src="images/5.png" alt="LED wall and floor with map"></figure>
       <figure><img src="images/6.png" alt="Purple curved LED corridor"></figure>
@@ -305,22 +438,20 @@
   </div>
 </section>
 
-<!-- ───────── REFERENCE: UNIVERSAL EVERYTHING ───────── -->
-<section class="section" id="reference">
-  <div class="section-inner">
+<!-- ============ REFERENCE ============ -->
+<section id="reference">
+  <div class="container">
     <div class="section-head">
-      <div>
-        <div class="section-num">§ 04 · REFERENCE</div>
-        <h2 class="section-title">Universal Everything.</h2>
-      </div>
-      <p class="section-lede">The closest visual language to what Around the World should feel like.</p>
+      <span class="section-label">§ 04 / Reference</span>
+      <h2 class="section-title">Universal Everything</h2>
+      <p class="section-sub">The closest visual language to what Around the World should feel like.</p>
     </div>
 
-    <div class="ue-wrap">
+    <div class="ue">
       <div class="ue-text">
         <p><b>Universal Everything</b> is a Sheffield-based experience design studio working at the edge of motion design, generative systems, and architectural-scale digital environments.</p>
         <p>Founded in 2004, they collaborate with brands, museums and cultural institutions on building-scale LED facades, immersive installations, and choreographed digital environments. Their vocabulary (abstract human motion, fluid generative form, content that responds to architecture) is the spiritual reference for this project.</p>
-        <a class="ue-link" href="https://www.universaleverything.com/experience-design" target="_blank" rel="noopener">universaleverything.com →</a>
+        <a class="ue-link" href="https://www.universaleverything.com/experience-design" target="_blank" rel="noopener">universaleverything.com &rarr;</a>
         <p class="ue-credit">Reference imagery via universaleverything.com</p>
       </div>
       <div class="ue-grid">
@@ -333,85 +464,211 @@
   </div>
 </section>
 
-<!-- ───────── BRAINSTORM ───────── -->
-<section class="section" id="brainstorm">
-  <div class="section-inner">
+<!-- ============ BRAINSTORM ============ -->
+<section id="brainstorm">
+  <div class="container">
     <div class="section-head">
-      <div>
-        <div class="section-num">§ 05 · BRAINSTORM</div>
-        <h2 class="section-title">Thirty things to throw at the wall.</h2>
-      </div>
-      <p class="section-lede">Moments, mechanics, atmospheres. Some are full concepts, some are 30-second seasonings. Cherry-pick.</p>
+      <span class="section-label">§ 05 / Brainstorm</span>
+      <h2 class="section-title">Thirty things to throw at the wall</h2>
+      <p class="section-sub">Moments, mechanics, atmospheres. Some are full concepts, some are 30-second seasonings. Cherry-pick.</p>
     </div>
 
-    <div class="bs-grid">
+    <div class="bs-list">
 
-      <div class="bs-card"><span class="bs-num">01</span><span class="bs-tag visual">Visual</span><h6>The pass that never lands</h6><p>The ball hangs mid-air in slow motion at the center of the wall. Visitors walk underneath it and look up.</p></div>
+      <article class="bs-item">
+        <div class="bs-meta"><span class="bs-num">01</span><span class="bs-tag">Visual</span></div>
+        <h4 class="bs-title">The pass that never lands</h4>
+        <p class="bs-desc">The ball hangs mid-air in slow motion at the center of the wall. Visitors walk underneath it and look up.</p>
+      </article>
 
-      <div class="bs-card"><span class="bs-num">02</span><span class="bs-tag interactive">Interactive</span><h6>Walk-on-water floor</h6><p>The LED floor only renders the pitch where you step. A grass trail blooms behind every visitor.</p></div>
+      <article class="bs-item">
+        <div class="bs-meta"><span class="bs-num">02</span><span class="bs-tag">Interactive</span></div>
+        <h4 class="bs-title">Walk-on-water floor</h4>
+        <p class="bs-desc">The LED floor only renders the pitch where you step. A grass trail blooms behind every visitor.</p>
+      </article>
 
-      <div class="bs-card"><span class="bs-num">03</span><span class="bs-tag visual">Visual</span><h6>Generative crowd</h6><p>An abstract stadium crowd on the wall whose density and noise scales with how many visitors are inside.</p></div>
+      <article class="bs-item">
+        <div class="bs-meta"><span class="bs-num">03</span><span class="bs-tag">Visual</span></div>
+        <h4 class="bs-title">Generative crowd</h4>
+        <p class="bs-desc">An abstract stadium crowd on the wall whose density and noise scales with how many visitors are inside.</p>
+      </article>
 
-      <div class="bs-card"><span class="bs-num">04</span><span class="bs-tag content">Content</span><h6>The boot</h6><p>Macro shot of a single muddy boot. A kid's voice describes her hero in her own language.</p></div>
+      <article class="bs-item">
+        <div class="bs-meta"><span class="bs-num">04</span><span class="bs-tag">Content</span></div>
+        <h4 class="bs-title">The boot</h4>
+        <p class="bs-desc">Macro shot of a single muddy boot. A kid's voice describes her hero in her own language.</p>
+      </article>
 
-      <div class="bs-card"><span class="bs-num">05</span><span class="bs-tag atmosphere">Atmosphere</span><h6>Hometown weather</h6><p>Audio and lighting shift to match the actual weather of the city on the wall right now.</p></div>
+      <article class="bs-item">
+        <div class="bs-meta"><span class="bs-num">05</span><span class="bs-tag">Atmosphere</span></div>
+        <h4 class="bs-title">Hometown weather</h4>
+        <p class="bs-desc">Audio and lighting shift to match the actual weather of the city on the wall right now.</p>
+      </article>
 
-      <div class="bs-card"><span class="bs-num">06</span><span class="bs-tag interactive">Interactive</span><h6>Echo trail</h6><p>Your footsteps light up the floor with the player's actual match-footwork data from a famous moment.</p></div>
+      <article class="bs-item">
+        <div class="bs-meta"><span class="bs-num">06</span><span class="bs-tag">Interactive</span></div>
+        <h4 class="bs-title">Echo trail</h4>
+        <p class="bs-desc">Your footsteps light up the floor with the player's actual match-footwork data from a famous moment.</p>
+      </article>
 
-      <div class="bs-card"><span class="bs-num">07</span><span class="bs-tag visual">Visual</span><h6>Time-collapse frame</h6><p>Kid and adult version of the same player, side by side on one wall, running in perfect sync.</p></div>
+      <article class="bs-item">
+        <div class="bs-meta"><span class="bs-num">07</span><span class="bs-tag">Visual</span></div>
+        <h4 class="bs-title">Time-collapse frame</h4>
+        <p class="bs-desc">Kid and adult version of the same player, side by side on one wall, running in perfect sync.</p>
+      </article>
 
-      <div class="bs-card"><span class="bs-num">08</span><span class="bs-tag content">Content</span><h6>Match graffiti</h6><p>Visitors' names and countries are scrawled into the wall textures over time, accumulating.</p></div>
+      <article class="bs-item">
+        <div class="bs-meta"><span class="bs-num">08</span><span class="bs-tag">Content</span></div>
+        <h4 class="bs-title">Match graffiti</h4>
+        <p class="bs-desc">Visitors' names and countries are scrawled into the wall textures over time, accumulating.</p>
+      </article>
 
-      <div class="bs-card"><span class="bs-num">09</span><span class="bs-tag audio">Audio</span><h6>Heartbeat wall</h6><p>Wall pulse synced to a player's real in-match heart rate from a famous moment, felt before it's understood.</p></div>
+      <article class="bs-item">
+        <div class="bs-meta"><span class="bs-num">09</span><span class="bs-tag">Audio</span></div>
+        <h4 class="bs-title">Heartbeat wall</h4>
+        <p class="bs-desc">Wall pulse synced to a player's real in-match heart rate from a famous moment, felt before it's understood.</p>
+      </article>
 
-      <div class="bs-card"><span class="bs-num">10</span><span class="bs-tag mechanic">Mechanic</span><h6>Thirty-second hero</h6><p>Player's entire career compressed to your walking speed. Walk fast, life flies. Stop and a moment lingers.</p></div>
+      <article class="bs-item">
+        <div class="bs-meta"><span class="bs-num">10</span><span class="bs-tag">Mechanic</span></div>
+        <h4 class="bs-title">Thirty-second hero</h4>
+        <p class="bs-desc">Player's entire career compressed to your walking speed. Walk fast, life flies. Stop and a moment lingers.</p>
+      </article>
 
-      <div class="bs-card"><span class="bs-num">11</span><span class="bs-tag interactive">Interactive</span><h6>Carry-in</h6><p>At entry, kids on the wall throw the ball to you. Your floor lights track it for the duration of your walk.</p></div>
+      <article class="bs-item">
+        <div class="bs-meta"><span class="bs-num">11</span><span class="bs-tag">Interactive</span></div>
+        <h4 class="bs-title">Carry-in</h4>
+        <p class="bs-desc">At entry, kids on the wall throw the ball to you. Your floor lights track it for the duration of your walk.</p>
+      </article>
 
-      <div class="bs-card"><span class="bs-num">12</span><span class="bs-tag content">Content</span><h6>Ball as protagonist</h6><p>Follow the ball, not the player, across continents and decades. Players are supporting cast.</p></div>
+      <article class="bs-item">
+        <div class="bs-meta"><span class="bs-num">12</span><span class="bs-tag">Content</span></div>
+        <h4 class="bs-title">Ball as protagonist</h4>
+        <p class="bs-desc">Follow the ball, not the player, across continents and decades. Players are supporting cast.</p>
+      </article>
 
-      <div class="bs-card"><span class="bs-num">13</span><span class="bs-tag visual">Visual</span><h6>Streetlight goal</h6><p>Wall shows a goal made of two streetlamps. Mum watching from the doorway, little brother as keeper.</p></div>
+      <article class="bs-item">
+        <div class="bs-meta"><span class="bs-num">13</span><span class="bs-tag">Visual</span></div>
+        <h4 class="bs-title">Streetlight goal</h4>
+        <p class="bs-desc">Wall shows a goal made of two streetlamps. Mum watching from the doorway, little brother as keeper.</p>
+      </article>
 
-      <div class="bs-card"><span class="bs-num">14</span><span class="bs-tag mechanic">Mechanic</span><h6>Continent border</h6><p>Cross a marked floor line and the language, music, ball texture and kit colour all change.</p></div>
+      <article class="bs-item">
+        <div class="bs-meta"><span class="bs-num">14</span><span class="bs-tag">Mechanic</span></div>
+        <h4 class="bs-title">Continent border</h4>
+        <p class="bs-desc">Cross a marked floor line and the language, music, ball texture and kit colour all change.</p>
+      </article>
 
-      <div class="bs-card"><span class="bs-num">15</span><span class="bs-tag content">Content</span><h6>Mum at the window</h6><p>Tiny framed scenes of mothers, sisters, neighbours watching from balconies and rooftops.</p></div>
+      <article class="bs-item">
+        <div class="bs-meta"><span class="bs-num">15</span><span class="bs-tag">Content</span></div>
+        <h4 class="bs-title">Mum at the window</h4>
+        <p class="bs-desc">Tiny framed scenes of mothers, sisters, neighbours watching from balconies and rooftops.</p>
+      </article>
 
-      <div class="bs-card"><span class="bs-num">16</span><span class="bs-tag visual">Visual</span><h6>Backheel chain</h6><p>The ball backheel-passes from kid to kid down the length of the wall until it reaches the adult.</p></div>
+      <article class="bs-item">
+        <div class="bs-meta"><span class="bs-num">16</span><span class="bs-tag">Visual</span></div>
+        <h4 class="bs-title">Backheel chain</h4>
+        <p class="bs-desc">The ball backheel-passes from kid to kid down the length of the wall until it reaches the adult.</p>
+      </article>
 
-      <div class="bs-card"><span class="bs-num">17</span><span class="bs-tag atmosphere">Atmosphere</span><h6>Rain interlude</h6><p>A quiet beat: the wall fills with rain, one kid plays alone. You stop walking. Then it lifts.</p></div>
+      <article class="bs-item">
+        <div class="bs-meta"><span class="bs-num">17</span><span class="bs-tag">Atmosphere</span></div>
+        <h4 class="bs-title">Rain interlude</h4>
+        <p class="bs-desc">A quiet beat: the wall fills with rain, one kid plays alone. You stop walking. Then it lifts.</p>
+      </article>
 
-      <div class="bs-card"><span class="bs-num">18</span><span class="bs-tag audio">Audio</span><h6>Untranslated commentary</h6><p>Local commentators in their own languages, no subtitles. Emotion lands without translation.</p></div>
+      <article class="bs-item">
+        <div class="bs-meta"><span class="bs-num">18</span><span class="bs-tag">Audio</span></div>
+        <h4 class="bs-title">Untranslated commentary</h4>
+        <p class="bs-desc">Local commentators in their own languages, no subtitles. Emotion lands without translation.</p>
+      </article>
 
-      <div class="bs-card"><span class="bs-num">19</span><span class="bs-tag audio">Audio</span><h6>The bench</h6><p>Old men on a pitch-side bench commenting on the kid. Subtitles only appear when you stop walking.</p></div>
+      <article class="bs-item">
+        <div class="bs-meta"><span class="bs-num">19</span><span class="bs-tag">Audio</span></div>
+        <h4 class="bs-title">The bench</h4>
+        <p class="bs-desc">Old men on a pitch-side bench commenting on the kid. Subtitles only appear when you stop walking.</p>
+      </article>
 
-      <div class="bs-card"><span class="bs-num">20</span><span class="bs-tag interactive">Interactive</span><h6>Avatar joins</h6><p>Your FIFA avatar from the other games gets invited into the kid's pickup match on the wall.</p></div>
+      <article class="bs-item">
+        <div class="bs-meta"><span class="bs-num">20</span><span class="bs-tag">Interactive</span></div>
+        <h4 class="bs-title">Avatar joins</h4>
+        <p class="bs-desc">Your FIFA avatar from the other games gets invited into the kid's pickup match on the wall.</p>
+      </article>
 
-      <div class="bs-card"><span class="bs-num">21</span><span class="bs-tag visual">Visual</span><h6>Phantom defenders</h6><p>The kid dribbles past invisible defenders that exist only on the floor LED beneath you.</p></div>
+      <article class="bs-item">
+        <div class="bs-meta"><span class="bs-num">21</span><span class="bs-tag">Visual</span></div>
+        <h4 class="bs-title">Phantom defenders</h4>
+        <p class="bs-desc">The kid dribbles past invisible defenders that exist only on the floor LED beneath you.</p>
+      </article>
 
-      <div class="bs-card"><span class="bs-num">22</span><span class="bs-tag atmosphere">Atmosphere</span><h6>Sky swap</h6><p>Fake-sky ceiling shifts to each city's actual current time-of-day. Sunset in Buenos Aires, dawn in Tokyo.</p></div>
+      <article class="bs-item">
+        <div class="bs-meta"><span class="bs-num">22</span><span class="bs-tag">Atmosphere</span></div>
+        <h4 class="bs-title">Sky swap</h4>
+        <p class="bs-desc">Fake-sky ceiling shifts to each city's actual current time-of-day. Sunset in Buenos Aires, dawn in Tokyo.</p>
+      </article>
 
-      <div class="bs-card"><span class="bs-num">23</span><span class="bs-tag visual">Visual</span><h6>Goal chorus</h6><p>At the climax wall, every angle of one famous goal plays in unison across the full surface.</p></div>
+      <article class="bs-item">
+        <div class="bs-meta"><span class="bs-num">23</span><span class="bs-tag">Visual</span></div>
+        <h4 class="bs-title">Goal chorus</h4>
+        <p class="bs-desc">At the climax wall, every angle of one famous goal plays in unison across the full surface.</p>
+      </article>
 
-      <div class="bs-card"><span class="bs-num">24</span><span class="bs-tag content">Content</span><h6>Family album</h6><p>Between scenes, walls of family photos: christenings, school photos, birthdays, first training kits.</p></div>
+      <article class="bs-item">
+        <div class="bs-meta"><span class="bs-num">24</span><span class="bs-tag">Content</span></div>
+        <h4 class="bs-title">Family album</h4>
+        <p class="bs-desc">Between scenes, walls of family photos: christenings, school photos, birthdays, first training kits.</p>
+      </article>
 
-      <div class="bs-card"><span class="bs-num">25</span><span class="bs-tag content">Content</span><h6>Cleat museum</h6><p>Small recessed niches with the actual youth boots from each player on display: physical objects in a digital room.</p></div>
+      <article class="bs-item">
+        <div class="bs-meta"><span class="bs-num">25</span><span class="bs-tag">Content</span></div>
+        <h4 class="bs-title">Cleat museum</h4>
+        <p class="bs-desc">Small recessed niches with the actual youth boots from each player on display: physical objects in a digital room.</p>
+      </article>
 
-      <div class="bs-card"><span class="bs-num">26</span><span class="bs-tag mechanic">Mechanic</span><h6>World map floor</h6><p>The floor LED constantly shows earth. Glowing lines trace each player's journey across it as you walk.</p></div>
+      <article class="bs-item">
+        <div class="bs-meta"><span class="bs-num">26</span><span class="bs-tag">Mechanic</span></div>
+        <h4 class="bs-title">World map floor</h4>
+        <p class="bs-desc">The floor LED constantly shows earth. Glowing lines trace each player's journey across it as you walk.</p>
+      </article>
 
-      <div class="bs-card"><span class="bs-num">27</span><span class="bs-tag content">Content</span><h6>Kid's bedroom</h6><p>One wall renders as a kid's room. Posters of their idols by the entrance, their own poster on the wall by the end.</p></div>
+      <article class="bs-item">
+        <div class="bs-meta"><span class="bs-num">27</span><span class="bs-tag">Content</span></div>
+        <h4 class="bs-title">Kid's bedroom</h4>
+        <p class="bs-desc">One wall renders as a kid's room. Posters of their idols by the entrance, their own poster on the wall by the end.</p>
+      </article>
 
-      <div class="bs-card"><span class="bs-num">28</span><span class="bs-tag interactive">Interactive</span><h6>Keepy-uppy mirror</h6><p>Kid does keepy-uppies on the wall. A floor square invites visitors to try along, and the wall counts both.</p></div>
+      <article class="bs-item">
+        <div class="bs-meta"><span class="bs-num">28</span><span class="bs-tag">Interactive</span></div>
+        <h4 class="bs-title">Keepy-uppy mirror</h4>
+        <p class="bs-desc">Kid does keepy-uppies on the wall. A floor square invites visitors to try along, and the wall counts both.</p>
+      </article>
 
-      <div class="bs-card"><span class="bs-num">29</span><span class="bs-tag audio">Audio</span><h6>Voice memos</h6><p>Invented audio dispatches from each player as a kid (lo-fi, like phone recordings), heard as you pass.</p></div>
+      <article class="bs-item">
+        <div class="bs-meta"><span class="bs-num">29</span><span class="bs-tag">Audio</span></div>
+        <h4 class="bs-title">Voice memos</h4>
+        <p class="bs-desc">Invented audio dispatches from each player as a kid (lo-fi, like phone recordings), heard as you pass.</p>
+      </article>
 
-      <div class="bs-card"><span class="bs-num">30</span><span class="bs-tag visual">Visual</span><h6>Unfinished match</h6><p>At the exit, the kid's match is still going on a small wall. Life-size, looping. You leave but it doesn't end.</p></div>
+      <article class="bs-item">
+        <div class="bs-meta"><span class="bs-num">30</span><span class="bs-tag">Visual</span></div>
+        <h4 class="bs-title">Unfinished match</h4>
+        <p class="bs-desc">At the exit, the kid's match is still going on a small wall. Life-size, looping. You leave but it doesn't end.</p>
+      </article>
 
     </div>
   </div>
 </section>
 
-<footer>
-  <p>3DAR × FIFA · Dribble Around the World · Phase 1 · brainstorm board v0.6</p>
+<!-- ============ FOOTER ============ -->
+<footer class="site-footer">
+  <div class="footer-inner">
+    <div>
+      <div class="footer-brand">3DAR x FIFA</div>
+      <div class="footer-info">Dribble Around the World / Phase 1 / Alpha Activation / 2026<br>
+        Brainstorm board v0.7 / contact: <a href="mailto:jorge@3dar.com">jorge@3dar.com</a>
+      </div>
+    </div>
+  </div>
 </footer>
 
 </body>
